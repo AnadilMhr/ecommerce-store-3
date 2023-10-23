@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="order.css">
+    <title>Order History</title>
+</head>
+<body>
+    <div class="order-history">
+        <h2>Order History</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Date</th>
+                    <th>Name</th>
+                    <th>Quantity</th>
+                    <th>Price</th>
+                    <th>Total</th>
+                </tr>
+            </thead>
+            <tbody id="order-list">
+                <!-- Order items will be dynamically added here using JavaScript -->
+            </tbody>
+        </table>
+    </div>
+    <!-- <script src="order.js"></script> -->
+    <script>
+
+document.addEventListener('DOMContentLoaded', function () {
+    const orderList = document.getElementById('order-list');
+
+    // Function to load order history from local storage
+    function loadOrderHistoryFromLocalStorage() {
+        const loggedInUser = localStorage.getItem('loggedInUser');
+
+        if (loggedInUser) {
+            const orderHistoryJSON = localStorage.getItem(`orderHistory_${loggedInUser}`);
+
+            if (orderHistoryJSON) {
+                const orderHistory = JSON.parse(orderHistoryJSON);
+
+                orderHistory.forEach(order => {
+                    addOrderItemToTable(order);
+                });
+            }
+        }
+    }
+
+    // Function to add an order item to the table
+    function addOrderItemToTable(order) {
+        const newRow = orderList.insertRow();
+        const cellDate = newRow.insertCell(0);
+        const cellName = newRow.insertCell(1);
+        const cellQuantity = newRow.insertCell(2);
+        const cellPrice = newRow.insertCell(3);
+        cellDate.innerHTML = order.date;
+        cellName.innerHTML = order.items[0].name;
+        cellQuantity.innerHTML = order.items[0].quantity;
+        cellPrice.innerHTML = order.items[0].price;
+    }
+
+    // Load order history when the page loads
+    loadOrderHistoryFromLocalStorage();
+});
+
+    </script>
+
+</body>
+</html>
+
+
+
+
+

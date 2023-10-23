@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <title>products</title>
+    <link rel="stylesheet" href="./products.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+<body>
+     <!-- Accessories section start -->
+  <div id="heading-2">
+    <h3 >Products <span>Categories</span></h3>
+  </div>
+<!-- Product Gallery -->
+  <section id="accessories">
+    <div class="main-2">
+      <div class="filter-buttons">
+        <button class="filter-button" onclick="filterProducts('all')">All</button>
+        <button class="filter-button" onclick="filterProducts('shirt')">Shirt</button>
+        <button class="filter-button" onclick="filterProducts('cap')">Cap</button>
+        <button class="filter-button" onclick="filterProducts('shoes')">Shoes</button>
+        <button class="filter-button" onclick="filterProducts('jewellery')">Jewellery</button>
+        <button class="filter-button" onclick="filterProducts('beauty')">Beauty</button>
+        <button class="filter-button" onclick="filterProducts('watch')">Watch</button>
+        <!-- Add more filter buttons for different categories -->
+      </div>
+        <div class="icon">
+          <i   class="fa-solid fa-cart-shopping" style="font-size: 1.5rem; color: blue; cursor: pointer;" onclick="toggleCart()"></i>   
+        </div>
+    </div>
+
+    <div class="product-gallery" id="productGallery">
+        <!-- Product items will be dynamically added here -->
+      </div>
+    
+      <!-- Shopping Cart -->
+      <div class="mine">
+        <div class="shopping-cart" id="shop-cart">
+          <i class="fa fa-times" onclick="closeMenu()"></i>
+            <h3>Shopping Cart</h3>
+            <div id="cartItems">
+              <!-- Cart items will be dynamically added here -->
+            </div>
+            <p>Total: $<span id="totalPrice">0</span></p>
+            <!-- <button onclick="del()" id="del-btn"><i class="fa-solid fa-trash"></i></button> -->
+          </div>
+      </div>
+    </section>
+
+    <script src="./products.js"></script>
+</body>
+</html>

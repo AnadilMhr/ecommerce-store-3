@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    /*-------------------------------------------
+SALE BANNER TEMPLATE
+----------------------------------------------*/
+
+#SaleBanner  {
+	/* float:left;
+	width:100%; */
+    max-width: 880px;
+	position:relative;
+	margin:20px auto;
+	overflow:hidden;
+	min-height: 258px;
+	height:auto;
+	background-color: palevioletred;
+   
+    animation: rotate 3s linear infinite;
+    animation: slideIn 3s ease-in-out infinite;
+}
+#SaleBannerWrapper{
+	max-width:760px;
+	margin:9px auto;
+	overflow:hidden;
+}
+#SaleBanner .Left {
+	width:375px;
+	display:block;
+	text-decoration: none;
+	margin:0 auto;
+}
+ #SaleBanner .Right {
+	width:375px;
+	display:block;
+	text-decoration: none;
+	margin: 0 auto;
+} 
+
+#SaleBanner .textarea {
+	margin:0;
+	padding:10px 0 0;
+	text-align:center;
+	width:100%;
+}
+#SaleBanner .textarea h1 {
+	color:#fff;
+	font:2.4em/0.8em Arial,Helvetica,sans-serif;
+	letter-spacing:0.35em;
+	text-transform:uppercase;
+	margin:0;
+}
+#SaleBanner .textarea h1 span {
+font:1.5em/1em Arial,Helvetica,sans-serif;
+	display:block;
+	border-top: 1px solid #FFF;
+	border-bottom: 1px solid #FFF;
+margin-top:6px;
+letter-spacing:0;
+font-weight:bold;
+}
+#SaleBanner .textarea h2 {    
+  color: #ffffff;
+  font-weight: normal;
+	font:6em/1em Arial,Helvetica,sans-serif;
+  padding: 10px 0;   
+  margin: 0 7%;    
+  position: relative;
+
+}
+#SaleBanner .textarea h2 span.Text1 {
+	  font:0.4em/0.85em Arial,Helvetica,sans-serif;
+	  font-weight: normal;  
+	color:#FFF;
+	width: 52px;
+	text-transform: uppercase;
+	  display:block;
+	  float:left;  
+}
+#SaleBanner .textarea h2 span.Text2 {
+	  font:1.7em/0.76em Arial,Helvetica,sans-serif;
+	  font-weight: normal;  
+	color:#FFF;
+	  display:inline-block;  
+}
+#SaleBanner .textarea h2 span.Text3 {
+	  font:1em/0.8em Arial,Helvetica,sans-serif;
+	  font-weight: normal;  
+	color:#FFF;
+	  display:inline-block;
+	  float:right;  
+}
+#SaleBanner .textarea h2 span.Text4 {
+	  font:0.5em/0.9em Arial,Helvetica,sans-serif;
+	  font-weight: normal;  
+	color:#FFF;
+	text-transform: uppercase;
+	  display:inline-block;
+	  float:right;
+	  position:absolute;
+	  right:0;
+	  top:89px;  
+}
+#SaleBanner .Right nav{
+	width: 100%;
+}
+#SaleBanner .Right nav a { 
+	float: left;    
+    width: 49.5%;
+    margin:0 auto;
+    font:1.1em/1em Arial,Helvetica,sans-serif;
+    color:#FFF;     
+    padding:21px 0;     
+    text-transform:uppercase;     
+    text-align: center;     
+    letter-spacing: 0.05em;     
+    display: inline-block;     
+    text-decoration: none;;
+}
+#SaleBanner .Right nav a.Top {		border-top: 1px solid rgba(255,255,255, 0.5)}
+#SaleBanner .Right nav a.Left {		border-left: 1px solid rgba(255,255,255, 0.5); border-right: 1px solid rgba(255,255,255, 0.5);}
+#SaleBanner .Right nav a.Right { 	border-right: 1px solid rgba(255,255,255, 0.5);}
+#SaleBanner .Right nav a.Bottom { 	border-bottom: 1px solid rgba(255,255,255, 0.5);}
+
+
+@keyframes slideIn {
+    0% {
+        transform: translateX(-100%);
+         /* opacity: 0;  */
+    }
+    100% {
+        transform: translateX(0);
+         /* opacity: 1;  */
+    }
+}
+
+
+/* ------------------------------
+DESKTOP QUERIES
+---------------------------------*/
+@media only screen and (min-width : 767px) {
+
+#SaleBanner .Left {
+    display: block;
+    float: left;
+}
+#SaleBanner .Right nav a {	width: 49.5%;}
+#SaleBanner .Right {float:left; margin-left:10px;}
+}
+
+/* ------------------------------
+FADE EFFECT - Just for hover effect do not change/add to the below style
+---------------------------------*/
+#SaleBanner .Right nav a.Button {
+	width:99.5%;
+	border: 1px solid rgba(255,255,255,1);
+}
+#SaleBanner .Right nav a:hover {
+    background-color:#000;
+    color:#fff;   
+}
+
+/* ------------------------------
+FADE EFFECT - Just for hover effect do not change/add to the below style
+---------------------------------*/
+#SaleBanner .hvr-fade {
+  backface-visibility: hidden;
+  box-shadow: 0 0 1px rgba(0, 0, 0, 0);
+  display: inline-block;
+  overflow: hidden;
+  transform: translateZ(0px);
+  transition-duration: 0.3s;
+  transition-property: color, background-color;
+  vertical-align: middle;
+}
+
+/* Responsive styles for screens under 392px */
+@media only screen and (max-width: 392px) {
+    #SaleBanner {
+        max-width: 100%;
+        min-height: auto;
+        height: auto;
+    }
+    #SaleBanner .Left,
+    #SaleBanner .Right {
+        width: 100%;
+        float: none;
+    }
+    #SaleBanner .textarea h1 {
+        font-size: 2em;
+    }
+    #SaleBanner .textarea h2 {
+        font-size: 3em;
+        margin: 0 5%;
+    }
+    #SaleBanner .textarea h2 span.Text1,
+    #SaleBanner .textarea h2 span.Text3 {
+        font-size: 0.6em;
+        position: absolute;
+        margin-left: 18px;
+    }
+    #SaleBanner .textarea h2 span.Text2 {
+        font-size: 1.5em;
+    }
+    #SaleBanner .textarea h2 span.Text4 {
+        font-size: 0.7em;
+        position: absolute;
+        top: 47px;
+    }
+    #SaleBanner .Right nav a {
+        width: 100%;
+        margin: 5px 0;
+        font-size: 1em;
+        padding: 10px 0;
+    }
+}
+
+</style>
+
+<body>
+    <div class="sale-main">
+    <div id="SaleBanner">
+
+        <div id="SaleBannerWrapper">
+            <a href="#" class="Left">
+                <div class="textarea"> 
+                     <h1>Summer <span>Sale</span></h1>  
+                     <h2>
+                         <span class="Text1">up to</span>
+                         <span class="Text2">50</span>
+                         <span class="Text3">%</span>
+                         <span class="Text4">Off</span>
+                     </h2> 
+                </div>
+            </a>
+            
+         <div class="Right">
+                <nav > 
+                     <a href="#" class="hvr-fade Top Left Bottom">Fashion</a>
+                     <a href="#" class="hvr-fade Top Right Bottom">Watch</a>
+                     <a href="#" class="hvr-fade Left Bottom">Jewellery</a>
+                     <a href="#" class="hvr-fade Right Bottom">Clothes</a>
+                     <a href="#" class="hvr-fade Left">Beauty</a>
+                     <a href="#" class="hvr-fade Right">Shoes</a>
+                     <a href="#" class="hvr-fade Button">Shop Now</a>
+                 </nav>
+        </div> 
+        
+        </div>
+        </div>
+        </div><!---end banner-->
+</body>
+</html>

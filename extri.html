@@ -1,0 +1,448 @@
+<!-- test 1.js -->
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const cartIcon = document.getElementById('cart-icon');
+    const cartCount = document.querySelector('.cart-count');
+    const productList = document.getElementById('product-list');
+    const searchInput = document.getElementById('search');
+    const tabButtons = document.querySelectorAll('.btn-a');
+    const createProductBtn = document.getElementById("createProductBtn");
+
+    let cartItems = [];
+    let products = loadProductsFromLocalStorage();
+    let currentCategory = "All Products"; // Default category
+    let searchQuery = ''; // Initialize the search query
+    let deletedProductIds = JSON.parse(localStorage.getItem('deletedProductIds')) || [];
+
+    // Sample product data with category property
+    const allProducts = [
+      // Your existing product data
+      { id: 1, category: "Shoes", image: 'p-5-min_11zon.jpg', name: 'Men Shoe', price: 10 },
+{ id: 2, category: "Shoes", image:'p-7-min_11zon.jpg',  name: 'Women Shoe', price: 15 },
+{ id: 3, category: "Shoes", image:'n-4-min_11zon.jpg',  name: 'Sneaker Men', price: 28 },
+{ id: 4, category: "Shoes", image:'n-5-min_11zon.jpg',  name: 'Sneaker Womens', price: 57 },
+{ id: 5, category: "Beauty", image:'p-10-min_11zon.jpg',  name: 'Highlighter', price: 64 },
+{ id: 6, category: "Beauty", image:'p-b1-min_11zon.jpg',  name: 'Bleach Cream', price: 73 },
+{ id: 7, category: "Beauty", image:'p-b7-min_11zon.jpg',  name: 'Powder Blush', price: 144 },
+{ id: 8, category: "Beauty", image:'n-6-min_11zon.jpg',  name: 'Makeup Brush', price: 99 },
+{ id: 9, category: "Jewellery", image:'n-1-min_11zon.jpg',  name: 'Ring', price: 144 },
+{ id: 10, category: "Jewellery", image:'p-j3-min_11zon.jpg',  name: 'Hair Clip', price: 99 },
+{ id: 11, category: "Jewellery", image:'p-j5-min_11zon.jpg',  name: 'White Stone Ring', price: 80 },
+{ id: 12, category: "Jewellery", image:'n-10-min_11zon.jpg',  name: 'Locket', price: 105 },
+{ id: 13, category: "Clothes", image:'pl-3-min_11zon.jpg',  name: 'Jacket', price: 66 },
+{ id: 14, category: "Clothes", image:'p-c5-min_11zon.jpg',  name: 'Summer Shirt', price: 128 },
+{ id: 15, category: "Clothes", image:'p-c1-min_11zon.jpg',  name: 'Kids Shirt', price: 90 },
+{ id: 16, category: "Clothes", image:'banner3-min_11zon.jpg',  name: 'Velvet Shirt', price: 43 },
+{ id: 17, category: "Watch", image:'n-8-min_11zon.jpg',  name: 'Casio Watch', price: 89 },
+{ id: 18, category: "Watch", image:'p-w9-min_11zon.jpg',  name: 'Stylish Watch', price: 105 },
+{ id: 19, category: "Watch", image:'p-w1-min_11zon.jpg',  name: 'Longines Watch', price: 64 },
+{ id: 20, category: "Watch", image:'n-9-min_11zon.jpg',  name: 'Rolex Watch', price: 73 },
+    ];
+
+    // Function to update local storage with all products
+    function updateLocalStorageWithProducts(products) {
+      localStorage.setItem('allProducts', JSON.stringify(products));
+    }
+
+    // Function to load all products from local storage
+    function loadProductsFromLocalStorage() {
+      const productsJSON = localStorage.getItem('allProducts');
+      if (productsJSON) {
+        return JSON.parse(productsJSON);
+      } else {
+        return allProducts;
+      }
+    }
+
+    // Function to add a product to the products array
+    function addProductToProducts(newProduct) {
+      products.push(newProduct);
+      updateLocalStorageWithProducts(products);
+    }
+
+    // Function to handle the creation of a new product
+    createProductBtn.addEventListener("click", function () {
+      const productName = document.getElementById("productName").value;
+      const productPrice = document.getElementById("productPrice").value;
+      const productCategory = document.getElementById("productCategory").value; 
+      const productImageInput = document.getElementById("productImage");
+
+      if (productName.trim() === "" || productPrice.trim() === "" || productImageInput.files.length === 0) {
+        alert("Please fill in all fields.");
+        return;
+      }
+
+      const productImageFile = productImageInput.files[0];
+
+      const newProduct = {
+        id: new Date().getTime(),
+        name: productName,
+        price: parseFloat(productPrice),
+        image: productImageFile.name,
+        category: productCategory,
+      };
+
+      addProductToProducts(newProduct);
+
+      document.getElementById("productName").value = "";
+      document.getElementById("productPrice").value = "";
+      document.getElementById("productCategory").value = "All Products";
+      document.getElementById("productImage").value = "";
+
+      alert("Product created successfully!");
+      renderProducts(); 
+    });
+
+   
+
+   // Function to update the cart count
+   function updateCartCount() {
+      const cartCountValue = cartItems.length >= 10 ? '9+' : cartItems.length.toString();
+      cartCount.textContent = cartCountValue;
+    }
+
+    // Function to handle product deletion
+    function handleProductDeletion(productId) {
+      // Remove the product from products array
+      products = products.filter(product => product.id !== productId);
+
+      // Add the deleted product ID to the list
+      deletedProductIds.push(productId);
+
+      // Save the updated deleted product IDs in local storage
+      updateLocalStorageWithProducts(products);
+      localStorage.setItem('deletedProductIds', JSON.stringify(deletedProductIds));
+
+      // Re-render the products
+      renderProducts();
+    }
+
+    // Function to render products based on the selected category and search query
+    function renderProducts() {
+      productList.innerHTML = '';
+
+      const filteredProducts = products.filter(product =>
+    (currentCategory === "All Products" || product.category === currentCategory) || 
+    (product.category === "All Products" && product.name.toLowerCase().includes(searchQuery.toLowerCase())) &&
+        // (currentCategory === "All Products" || product.category === currentCategory) &&
+        // (product.name.toLowerCase().includes(searchQuery.toLowerCase())) &&
+        !deletedProductIds.includes(product.id) // Exclude deleted products
+      );
+
+      filteredProducts.forEach(product => {
+        const productItem = document.createElement('div');
+        productItem.classList.add('product-item');
+        productItem.innerHTML = `
+          <img src="image/${product.image}">
+          <h3>${product.name}</h3>
+          <p>Price: $${product.price}</p>
+          <div class="abc">
+            <button class="add-to-cart-btn" aria-hidden="true" data-id="${product.id}">Add to Cart</button>
+          </div>
+          <div class=m-del>
+            <button class="del-b" data-id="${product.id}">Delete</button>
+          </div>
+        `;
+
+        const addToCartButton = productItem.querySelector('.add-to-cart-btn');
+        addToCartButton.addEventListener('click', () => addToCart(product));
+
+        const deleteButton = productItem.querySelector('.del-b');
+        deleteButton.addEventListener('click', () => handleProductDeletion(product.id));
+
+        productList.appendChild(productItem);
+      });
+    }
+
+    // Function to handle tab button click
+    function handleTabButtonClick(event) {
+      const clickedButton = event.target;
+      const category = clickedButton.textContent;
+
+      // Update the current category
+      currentCategory = category;
+
+      // Activate the clicked button and deactivate others
+      tabButtons.forEach(button => {
+        button.classList.remove('active');
+      });
+      clickedButton.classList.add('active');
+
+      // Render products based on the selected category and search query
+      renderProducts();
+    }
+
+    // Function to add a product to the cart
+    function addToCart(product) {
+      const existingCartItem = cartItems.find(item => item.id === product.id);
+
+      if (existingCartItem) {
+        existingCartItem.quantity += 1;
+      } else {
+        cartItems.push({ ...product, quantity: 1 });
+      }
+
+      updateCartCount();
+      updateLocalStorage();
+    }
+
+    // Function to update local storage
+    function updateLocalStorage() {
+      localStorage.setItem('cartItems', JSON.stringify(cartItems));
+    }
+
+    // Load cart items from local storage on page load
+    function loadCartItemsFromLocalStorage() {
+      const cartItemsJSON = localStorage.getItem('cartItems');
+      if (cartItemsJSON) {
+        cartItems = JSON.parse(cartItemsJSON);
+        updateCartCount();
+      }
+    }
+
+    // Initialize the page
+    function init() {
+      loadCartItemsFromLocalStorage();
+        // Check for deleted product IDs and filter the products
+      const updatedProducts = products.filter(product => !deletedProductIds.includes(product.id));
+      products = updatedProducts;
+      // products = loadProductsFromLocalStorage();
+      renderProducts();
+      tabButtons.forEach(button => {
+        button.addEventListener('click', handleTabButtonClick);
+      });
+      searchInput.addEventListener('input', () => {
+        searchQuery = searchInput.value;
+        renderProducts();
+      });
+    }
+
+    init();
+  });
+</script>
+
+
+
+<!-- caart 88.js -->
+
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const cartIcon = document.getElementById('cart-icon');
+    const cartCount = document.querySelector('.cart-count');
+    const productList = document.getElementById('product-list');
+    const searchInput = document.getElementById('search');
+    const tabButtons = document.querySelectorAll('.btn-a');
+
+    let cartItems = [];
+    let products = loadProductsFromLocalStorage(); // All products (including category)
+    let currentCategory = "All Products"; // Default category
+    let searchQuery = ''; // Initialize the search query
+    let deletedProductIds = JSON.parse(localStorage.getItem('deletedProductIds')) || [];
+
+   
+ // Sample product data with category property
+    const allProducts = [
+    { id: 1, category: "Shoes", image: 'p-5-min_11zon.jpg', name: 'Men Shoe', price: 10 },
+{ id: 2, category: "Shoes", image:'p-7-min_11zon.jpg',  name: 'Women Shoe', price: 15 },
+{ id: 3, category: "Shoes", image:'n-4-min_11zon.jpg',  name: 'Sneaker Men', price: 28 },
+{ id: 4, category: "Shoes", image:'n-5-min_11zon.jpg',  name: 'Sneaker Womens', price: 57 },
+{ id: 5, category: "Beauty", image:'p-10-min_11zon.jpg',  name: 'Highlighter', price: 64 },
+{ id: 6, category: "Beauty", image:'p-b1-min_11zon.jpg',  name: 'Bleach Cream', price: 73 },
+{ id: 7, category: "Beauty", image:'p-b7-min_11zon.jpg',  name: 'Powder Blush', price: 144 },
+{ id: 8, category: "Beauty", image:'n-6-min_11zon.jpg',  name: 'Makeup Brush', price: 99 },
+{ id: 9, category: "Jewellery", image:'n-1-min_11zon.jpg',  name: 'Ring', price: 144 },
+{ id: 10, category: "Jewellery", image:'p-j3-min_11zon.jpg',  name: 'Hair Clip', price: 99 },
+{ id: 11, category: "Jewellery", image:'p-j5-min_11zon.jpg',  name: 'White Stone Ring', price: 80 },
+{ id: 12, category: "Jewellery", image:'n-10-min_11zon.jpg',  name: 'Locket', price: 105 },
+{ id: 13, category: "Clothes", image:'pl-3-min_11zon.jpg',  name: 'Jacket', price: 66 },
+{ id: 14, category: "Clothes", image:'p-c5-min_11zon.jpg',  name: 'Summer Shirt', price: 128 },
+{ id: 15, category: "Clothes", image:'p-c1-min_11zon.jpg',  name: 'Kids Shirt', price: 90 },
+{ id: 16, category: "Clothes", image:'banner3-min_11zon.jpg',  name: 'Velvet Shirt', price: 43 },
+{ id: 17, category: "Watch", image:'n-8-min_11zon.jpg',  name: 'Casio Watch', price: 89 },
+{ id: 18, category: "Watch", image:'p-w9-min_11zon.jpg',  name: 'Stylish Watch', price: 105 },
+{ id: 19, category: "Watch", image:'p-w1-min_11zon.jpg',  name: 'Longines Watch', price: 64 },
+{ id: 20, category: "Watch", image:'n-9-min_11zon.jpg',  name: 'Rolex Watch', price: 73 },
+        // Add more products here with category property
+    ];
+
+  // Function to update local storage with all products
+  function updateLocalStorageWithProducts(products) {
+      localStorage.setItem('allProducts', JSON.stringify(products));
+    }
+
+    // Function to load all products from local storage
+    function loadProductsFromLocalStorage() {
+      const productsJSON = localStorage.getItem('allProducts');
+      if (productsJSON) {
+        return JSON.parse(productsJSON);
+      } else {
+        return allProducts;
+      }
+    }
+
+    // Function to add a product to the products array
+    function addProductToProducts(newProduct) {
+      products.push(newProduct);
+      updateLocalStorageWithProducts(products);
+    }
+
+      // Function to handle product deletion
+      function handleProductDeletion(productId) {
+      // Remove the product from products array
+      products = products.filter(product => product.id !== productId);
+
+      // Add the deleted product ID to the list
+      deletedProductIds.push(productId);
+
+      // Save the updated deleted product IDs in local storage
+      updateLocalStorageWithProducts(products);
+      localStorage.setItem('deletedProductIds', JSON.stringify(deletedProductIds));
+
+      // Re-render the products
+      renderProducts();
+    }
+
+     // Function to update the cart count
+    function updateCartCount() {
+    const cartCountValue = cartItems.length >= 10 ? '9+' : cartItems.length.toString();
+    cartCount.textContent = cartCountValue;
+     }
+
+    // Function to render products based on the selected category and search query
+    function renderProducts() {
+        productList.innerHTML = '';
+
+        const filteredProducts = products.filter(product =>
+        (currentCategory === "All Products" || product.category === currentCategory) || 
+       (product.category === "All Products" && product.name.toLowerCase().includes(searchQuery.toLowerCase())) &&
+       !deletedProductIds.includes(product.id)
+        );
+
+      filteredProducts.forEach(product => {
+            const productItem = document.createElement('div');
+            productItem.classList.add('product-item');
+            productItem.innerHTML = `
+                <img src="image/${product.image}">
+                <h3>${product.name}</h3>
+                <p>Price: $${product.price}</p>
+                <div class="abc">
+                    <button class="add-to-cart-btn" aria-hidden="true" data-id="${product.id}">Add to Cart</button>
+                </div>
+            `;
+
+            const addToCartButton = productItem.querySelector('.add-to-cart-btn');
+            addToCartButton.addEventListener('click', () => addToCart(product));
+
+            productList.appendChild(productItem);
+        });
+    }
+
+    // Function to handle tab button click
+    function handleTabButtonClick(event) {
+        const clickedButton = event.target;
+        const category = clickedButton.textContent;
+
+        // Update the current category
+        currentCategory = category;
+
+        // Activate the clicked button and deactivate others
+        tabButtons.forEach(button => {
+            button.classList.remove('active');
+        });
+        clickedButton.classList.add('active');
+
+        // Render products based on the selected category and search query
+        renderProducts();
+    }
+
+    // Function to add a product to the cart
+    // function addToCart(product) {
+    //     cartItems.push({ ...product, quantity: 1 });
+    //     updateCartCount();
+    //     updateLocalStorage();
+    // }
+
+
+    //  Function to add a product to the cart
+ function addToCart(product) {
+     const existingCartItem = cartItems.find(item => item.id === product.id);
+
+    if (existingCartItem) {
+        existingCartItem.quantity += 1;
+         } else {
+        cartItems.push({ ...product, quantity: 1 });
+    }
+
+    updateCartCount();
+   updateLocalStorage();
+ }
+
+    // Function to update local storage
+    function updateLocalStorage() {
+        localStorage.setItem('cartItems', JSON.stringify(cartItems));
+    }
+
+    // Load cart items from local storage on page load
+    function loadCartItemsFromLocalStorage() {
+        const cartItemsJSON = localStorage.getItem('cartItems');
+        if (cartItemsJSON) {
+            cartItems = JSON.parse(cartItemsJSON);
+            updateCartCount();
+        }
+    }
+
+    
+
+
+ // Initialize the page
+ function init() {
+      loadCartItemsFromLocalStorage();
+        // Check for deleted product IDs and filter the products
+      const updatedProducts = products.filter(product => !deletedProductIds.includes(product.id));
+      products = updatedProducts;
+      // products = loadProductsFromLocalStorage();
+      renderProducts();
+      tabButtons.forEach(button => {
+        button.addEventListener('click', handleTabButtonClick);
+      });
+      searchInput.addEventListener('input', () => {
+        searchQuery = searchInput.value;
+        renderProducts();
+      });
+    }
+
+    init();
+  });
+
+</script>               
+
+
+<!-- "I am suffering from a pink eye infection; that's why I am late in submitting this task." -->
+
+<!-- edit css  -->
+<style>
+  .main{
+   min-height: 100vh;
+   background-color: rgba(0,0,0,.7);
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   padding: 2rem;
+   overflow-y: scroll;
+   position: fixed;
+   top: 0;
+   left: 0;
+   z-index: 1200;
+   width: 100%;
+   /* ya page ki css ha */
+}
+
+.form{
+  /* ya form ki */
+  width: 50rem;
+  padding: 2rem;
+  text-align: center;
+  border-radius: 5rem;
+  background-color: #fff;
+}
+</style>

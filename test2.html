@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <title>Your Page Title</title>
+</head>
+<style>
+    /* styles.css */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+header {
+    background-color: #333;
+    color: #fff;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+}
+
+.logo {
+    font-size: 24px;
+}
+
+button#logoutBtn {
+    background-color: #333;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+}
+
+.search-bar {
+    text-align: center;
+    padding: 10px;
+}
+
+input#searchInput {
+    padding: 5px;
+    width: 60%;
+}
+
+button#searchBtn {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+}
+
+.tabs {
+    text-align: center;
+    padding: 10px;
+}
+
+button.tab {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    margin: 5px;
+}
+
+.products {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.product {
+    border: 1px solid #ddd;
+    padding: 10px;
+    margin: 10px;
+    text-align: center;
+    max-width: 200px;
+}
+
+.product-name {
+    font-weight: bold;
+}
+
+.delete-product, .update-product {
+    background-color: #ff0000; /* Red color for delete button */
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    margin: 5px;
+}
+
+</style>
+<body>
+    <header>
+        <div class="logo">Your Logo</div>
+        <button id="logoutBtn">Logout</button>
+    </header>
+    
+    <div class="search-bar">
+        <input type="text" id="searchInput" placeholder="Search...">
+        <button id="searchBtn">Search</button>
+    </div>
+    
+    <div class="tabs">
+        <!-- Add your tabs here -->
+        <button class="tab">Tab 1</button>
+        <button class="tab">Tab 2</button>
+        <button class="tab">Tab 3</button>
+    </div>
+    
+    <div class="products" id="productContainer">
+        <!-- Products will be added dynamically through JavaScript -->
+    </div>
+    
+    <script>
+        // script.js
+document.addEventListener("DOMContentLoaded", function () {
+    const productContainer = document.getElementById("productContainer");
+
+    // Sample product data
+    const products = [
+        { name: "Product 1" },
+        { name: "Product 2" },
+        { name: "Product 3" },
+    ];
+
+    // Function to render products
+    function renderProducts() {
+        productContainer.innerHTML = ''; // Clear the existing content
+        products.forEach((product, index) => {
+            const productCard = document.createElement("div");
+            productCard.classList.add("product");
+            productCard.innerHTML = `
+                <span class="product-name">${product.name}</span>
+                <button class="delete-product" data-index="${index}">Delete</button>
+                <button class="update-product" data-index="${index}">Update</button>
+            `;
+            productContainer.appendChild(productCard);
+        });
+
+        // Add event listeners for delete buttons
+        const deleteButtons = document.querySelectorAll('.delete-product');
+        deleteButtons.forEach(button => {
+            button.addEventListener('click', function () {
+                const index = this.getAttribute('data-index');
+                products.splice(index, 1); // Remove the product from the array
+                renderProducts(); // Refresh the product list
+            });
+        });
+    }
+
+    renderProducts(); // Initial rendering
+});
+
+    </script>
+</body>
+</html>
+

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="forms.css">
+  <!-- <script src="s.js" defer></script> -->
+  <title>Signup</title>
+  <script>
+        // Check if the user is already logged in
+        const userLoggedIn = localStorage.getItem("userLoggedIn");
+        if (userLoggedIn === "true") {
+            window.location.href = "website.html"; // Redirect to the main page
+        }
+</script>
+
+</head>
+<body>
+  <div class="main">
+  <div class="form-container">
+    <h1>Sign Up</h1>
+    <form id="signup-form">
+      <input type="text" id="username" placeholder="Username" required>
+      <input type="email" id="email" placeholder="Email" required>
+      <input type="password" id="password" placeholder="Password" required>
+      <select name="user_type">
+        <option value="user">user</option>
+        <option value="admin">admin</option>
+      </select>
+      <button type="submit"  class="btn-1">Submit</button>
+    </form>
+     <div class="info">
+      <h4>Already have an account?<span><a href="./login.html">login now</a></span></h4> 
+     </div>
+    <p id="signup-error" class="error"></p>
+  </div>
+  </div>
+
+   <script src="./st.js"></script>   
+  <!-- <script src="./sl.js"></script>  -->
+</body>
+</html>

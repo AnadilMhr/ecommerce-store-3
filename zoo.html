@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <title>Image Slider</title>
+</head>
+
+<style>
+    body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+}
+
+.slider {
+    position: relative;
+    max-width: 1000px;
+    margin: 0 auto;
+    overflow: hidden;
+    margin-top: 50px;
+}
+
+.slide {
+    display: none;
+}
+
+.slide img {
+    width: 100%;
+    height: 300px;
+}
+
+.fade {
+    animation-name: fade;
+    animation-duration: 1.5s;
+}
+
+/* @keyframes fade {
+    0% {opacity: 0;}
+    20% {opacity: 1;}
+    80% {opacity: 1;}
+    100% {opacity: 0;}
+} */
+
+.prev, .next {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: #333;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    cursor: pointer;
+    font-size: 18px;
+    z-index: 1;
+    transition: background-color 0.3s;
+}
+
+.prev:hover, .next:hover {
+    background-color: #555;
+}
+
+</style>
+<body>
+    <div class="slider">
+        <div class="slide fade">
+            <img src="./image/background.png" alt="Image 1">
+        </div>
+        <div class="slide fade">
+            <img src="./image/banner4.jpg" alt="Image 2">
+        </div>
+        <div class="slide fade">
+            <img src="./image/banner.jpg" alt="Image 3">
+        </div>
+        <button class="prev" onclick="plusSlides(-1)">&#10094;</button>
+        <button class="next" onclick="plusSlides(1)">&#10095;</button>
+    </div>
+
+
+    <script>
+        let slideIndex = 0;
+showSlides();
+
+function plusSlides(n) {
+    showSlides(slideIndex += n);
+}
+
+function showSlides(n) {
+    const slides = document.querySelectorAll(".slide");
+    if (n === undefined) {
+        slideIndex++;
+    }
+    if (slideIndex >= slides.length) {
+        slideIndex = 0;
+    }
+    if (slideIndex < 0) {
+        slideIndex = slides.length - 1;
+    }
+    slides.forEach((slide) => (slide.style.display = "none"));
+    slides[slideIndex].style.display = "block";
+    setTimeout(showSlides, 2000);
+}
+
+    </script>
+</body>
+</html>
+
+    
+
+<!-- anab task -->
+
+
+
+

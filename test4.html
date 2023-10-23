@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <title>Pulsating Animated Banner</title>
+</head>
+<style>
+    /* Reset default margin and padding */
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f5f5f5;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.animated-banner {
+    background-image: url('banner-background.jpg'); /* Replace with your background image */
+    background-size: cover;
+    text-align: center;
+    border-radius: 5px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+    max-width: 400px;
+    width: 100%;
+    overflow: hidden;
+    position: relative;
+    animation: pulse 2s ease-in-out infinite;
+}
+
+.banner-content {
+    background-color: rgba(255, 87, 34, 0.8);
+    color: #fff;
+    padding: 20px;
+}
+
+h1 {
+    font-size: 36px;
+    margin-bottom: 10px;
+}
+
+p {
+    font-size: 18px;
+    margin-bottom: 20px;
+}
+
+.shop-now-button {
+    display: inline-block;
+    background-color: #fff;
+    color: #ff5722;
+    padding: 10px 20px;
+    text-decoration: none;
+    border-radius: 5px;
+    font-weight: bold;
+    transition: background-color 0.3s;
+}
+
+.shop-now-button:hover {
+    background-color: #ff5722;
+}
+
+@keyframes pulse {
+    0% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.1);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
+/* Responsive styles */
+@media (max-width: 768px) {
+    .animated-banner {
+        max-width: 100%;
+    }
+}
+
+</style>
+<body>
+    <div class="animated-banner">
+        <div class="banner-content">
+            <h1>Flash Sale</h1>
+            <p>Don't miss our limited-time offers</p>
+            <a href="#" class="shop-now-button">Shop Now</a>
+        </div>
+    </div>
+</body>
+</html>

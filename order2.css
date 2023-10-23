@@ -1,0 +1,61 @@
+/* Container for the order history */
+.order-history {
+  max-width: 800px;
+  margin: 20px auto;
+  padding: 20px;
+  background-color: #13131a;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+  text-align: center;
+  color: #fff;
+}
+
+/* Order history title */
+.order-history h2 {
+  font-size: 24px;
+  margin-bottom: 20px;
+}
+
+/* Table styles */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  color: #fff;
+}
+
+table, th, td {
+  border: 1px solid #ddd;
+}
+
+th, td {
+  padding: 10px;
+  text-align: center;
+}
+
+th {
+  background-color: #13131a;
+  color: #fff;
+}
+
+/* Responsive design for smaller screens */
+@media (max-width: 768px) {
+  .order-history {
+      padding: 10px;
+  }
+
+  .order-history h2 {
+      font-size: 28px;
+  }
+}
+
+
+
+
+
+
+
+
+
+
+  
+  

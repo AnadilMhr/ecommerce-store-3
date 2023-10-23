@@ -1,0 +1,855 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shopping Cart Example</title>
+    <link rel="stylesheet" href="./mediaquery.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <!-- <link rel="stylesheet" href="styles.css"> -->
+</head>
+<body>
+    <style>
+   
+
+
+   *{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Poppins", sans-serif;
+}
+/* header */
+nav {
+  display: flex;
+  padding: 0.7% 6%;
+  justify-content: space-between;
+  /* align-items: center; */
+  background-color: #232d60; 
+  margin-bottom: 50px;
+}
+
+.cc{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+nav h1 {
+  color: #ff77cd;
+  /* margin-left: -51px; */
+  padding: 2.2% 0%;
+}
+nav img {
+  width: 200px;
+}
+.nav-links {
+  flex: 1;
+  text-align: right;
+}
+.nav-links ul li {
+  list-style: none;
+  display: inline-block;
+  padding: 8px 12px;
+  position: relative;
+}
+.nav-links ul li a {
+  color: #fff;
+  text-decoration: none;
+  font-size: 17px;
+  transition: 0.5s;
+}
+.nav-links ul li a:hover{
+  color: #ff77cd;
+}
+
+ nav .fa{
+   display: none;
+ }
+
+ #welcome{
+  font-weight: 500;
+  color: #fff;
+ font-size: 30px;
+ }
+
+ @media (max-width:425px){
+  #welcome{
+    font-size: 20px;
+  }
+}
+
+ @media(max-width: 940px){
+  
+  .nav-links ul li{
+    display: block;
+  }
+  .nav-links ul li a:hover{
+    color: #232d60;
+  }
+  .nav-links{
+     position: absolute;
+     background: #ff77cd;
+     height: 100vh;
+     width: 200px;
+     top: 0;
+     right: -200px;
+     text-align: left;
+     z-index: 2;
+     transition: 1s;
+   }
+   nav .fa{
+     display: block;
+     color: #fff;
+     margin-left: 10px;
+     margin-top: 10px;
+     font-size: 22px;
+     cursor: pointer;
+   }
+   .nav-links ul{
+     padding: 30px;
+   }
+ 
+  
+}
+ /* header */
+   
+ header{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0% 6%;
+    /* background-color: #232d60; */
+    margin-bottom: 30px;
+ }
+
+  #search{
+    outline: none;
+    width: 40%;
+    border: none;
+    border-bottom: 2px solid #232d60;
+    background: transparent;
+    padding: 7px 0px;
+ }
+
+ input {
+    color:#232d60;
+    margin-bottom: 7px;
+    font-size: 15px;
+ }
+
+ header .cart-count{
+    background: palevioletred;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #fff;
+    position: absolute;
+    top: 215px;
+    left: 93%;
+    width: 30px;
+    height: 30px;
+ }
+
+ .cart-icon i{
+    font-size: 1.8rem;
+    color: #232d60;
+ }
+
+
+   /* Main content styles */
+main {
+    padding: 20px;
+    margin-bottom: 30px;
+}
+
+/* Product list styles */
+.product-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    /* gap: 40px; */
+    grid-column-gap: 100px;
+    row-gap: 50px;
+    padding: 0px 60px;
+}
+
+/* Product card styles */
+.product-item {
+    background-color: #fff;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    border-radius: 5px;
+}
+
+.product-item img {
+    max-width: 100%;
+    /* height: 110px;
+    width: 200px; */
+ }
+
+.product-item h3 {
+    font-size: 17px;
+    margin-top: 10px;
+    text-align: center;
+}
+
+.product-item p {
+    font-size: 16px;
+    margin-top: 20px;
+    text-align: center;
+}
+
+.add-to-cart-btn {
+    background-color:#232d60 ;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 15px;
+    cursor: pointer;
+    margin-top: 16px;
+    text-align: center;
+    /* margin-left: 47px;  */
+    transition: background-color 0.3s;
+} 
+
+.add-to-cart-btn:hover {
+    background-color: #4e598f;
+}
+
+@media (max-width:990px){
+  header .cart-count{
+   top: 281px; 
+}
+}
+
+@media(max-width:500px){
+  #search{
+    width: 50%;
+  }
+  header .cart-count{
+  
+    /* top: 114px; */
+    left: 91%;
+    font-size: 16px;
+  }
+  .cart-icon{
+    font-size: 1.5rem;
+  }
+  input{
+    font-size: 12px;
+  }
+}
+@media (max-width:481px){
+  header .cart-count{
+   top: 343px; 
+}
+}
+
+@media(max-width:365px){
+  header .cart-count{
+  width: 25px;
+  height: 25px;
+  font-size: 13px;
+}
+#search{
+  width: 46%;
+}
+.cart-icon{
+  font-size: 1.3rem;
+}
+input{
+  font-size: 9px;
+}
+}
+@media only screen and (max-width: 325px) {
+  .product-list {
+    padding: 0px 5px !important;
+    
+  }
+}
+@media (max-width:311px){
+  header .cart-count{
+    top: 557px;
+  }
+}
+
+
+   /* footer */
+   footer{
+        /* position: fixed; */
+        background: #232d60;
+        width: 100%;
+        /* bottom: 0;
+        left: 0; */
+      }
+      /* footer::before{
+        content: '';
+        position: absolute;
+        left: 0;
+        top: 100px;
+        height: 1px;
+        width: 100%;
+        background: #AFAFB6;
+      } */
+      footer .content{
+        max-width: 1250px;
+        margin: auto;
+        padding: 30px 40px 40px 40px;
+      }
+      footer .content .top{
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 50px;
+      }
+      .content .top .logo-details{
+        color: #fff;
+        font-size: 30px;
+      }
+      .content .top .media-icons{
+        display: flex;
+      }
+      .content .top .media-icons a{
+        height: 40px;
+        width: 40px;
+        margin: 0 8px;
+        border-radius: 50%;
+        text-align: center;
+        line-height: 40px;
+        color: #fff;
+        font-size: 17px;
+        text-decoration: none;
+        transition: all 0.4s ease;
+      }
+      .top .media-icons a:nth-child(1){
+        background: #4267B2;
+      }
+      .top .media-icons a:nth-child(1):hover{
+        color: #4267B2;
+        background: #fff;
+      }
+      .top .media-icons a:nth-child(2){
+        background: #1DA1F2;
+      }
+      .top .media-icons a:nth-child(2):hover{
+        color: #1DA1F2;
+        background: #fff;
+      }
+      .top .media-icons a:nth-child(3){
+        background: #E1306C;
+      }
+      .top .media-icons a:nth-child(3):hover{
+        color: #E1306C;
+        background: #fff;
+      }
+      .top .media-icons a:nth-child(4){
+        background: #0077B5;
+      }
+      .top .media-icons a:nth-child(4):hover{
+        color: #0077B5;
+        background: #fff;
+      }
+      .top .media-icons a:nth-child(5){
+        background: #FF0000;
+      }
+      .top .media-icons a:nth-child(5):hover{
+        color: #FF0000;
+        background: #fff;
+      }
+      footer .content .link-boxes{
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+      }
+      footer .content .link-boxes .box{
+         width: calc(100% / 5 - 10px); 
+      }
+      .content .link-boxes .box .link_name{
+        color: #fff;
+        font-size: 18px;
+        font-weight: 400;
+        margin-bottom: 10px;
+        position: relative;
+      }
+      /* .link-boxes .box .link_name::before{
+        content: '';
+        position: absolute;
+        left: 0;
+        bottom: -2px;
+        height: 2px;
+        width: 35px;
+        background: #fff;
+      } */
+      .content .link-boxes .box li{
+        margin: 6px 0;
+        list-style: none;
+      }
+      .content .link-boxes .box li a{
+        color: #fff;
+        font-size: 14px;
+        font-weight: 400;
+        text-decoration: none;
+        opacity: 0.8;
+        transition: all 0.4s ease
+      }
+      .content .link-boxes .box li a:hover{
+        opacity: 1;
+        text-decoration: underline;
+      }
+      .content .link-boxes .input-box{
+        margin-right: 55px;
+      }
+      .link-boxes .input-box input{
+        height: 40px;
+        /* width: calc(100% + 55px); */
+        outline: none;
+        border: 2px solid #AFAFB6;
+        background: #232d60;
+        border-radius: 4px;
+        padding: 0 10px;
+        font-size: 15px;
+        color: #fff;
+        margin-top: 5px;
+      }
+      .link-boxes .input-box input::placeholder{
+        color: #AFAFB6;
+        font-size: 16px;
+      }
+      .link-boxes .input-box input[type="button"]{
+        background: #fff;
+        color: #140B5C;
+        border: none;
+        font-size: 18px;
+        font-weight: 500;
+        margin: 4px 0;
+        opacity: 0.8;
+        cursor: pointer;
+        transition: all 0.4s ease;
+      }
+      .input-box input[type="button"]:hover{
+        opacity: 1;
+      }
+      footer .bottom-details{
+        width: 100%;
+        background:palevioletred;
+      }
+      footer .bottom-details .bottom_text{
+        max-width: 1250px;
+        margin: auto;
+        padding: 20px 40px;
+        display: flex;
+        justify-content: center;
+      }
+      .bottom-details .bottom_text span,
+      .bottom-details .bottom_text a{
+        font-size: 14px;
+        font-weight: 500;
+        color: #232d60;
+        /* opacity: 0.8; */
+        text-decoration: none;
+      }
+      .bottom-details .bottom_text a:hover{
+        opacity: 1;
+        text-decoration: underline;
+      }
+      .bottom-details .bottom_text a{
+        margin-right: 10px;
+      }
+
+
+      /* Footer */
+
+@media (max-width: 900px) {
+  footer .content .top .link-boxes { 
+    flex-wrap: wrap !important;   
+  }
+  footer .content .link-boxes .input-box{
+    width: 40%;
+    margin-top: 10px;
+  }
+
+  .top .link-boxes{
+    flex-wrap: wrap;
+  }
+  .link-boxes{
+    flex-wrap: wrap;
+  }
+}
+@media (max-width: 700px){
+  footer{
+    position: relative;
+  } footer .content .top{
+    flex-direction: column;
+  }
+
+  .content .top .logo-details{
+    font-size: 26px;
+  }
+  .content .top .media-icons a{
+    height: 35px;
+    width: 35px;
+    font-size: 14px;
+    line-height: 35px;
+  }
+  footer .content .link-boxes .box{
+    width: calc(100% / 3 - 10px);
+  }
+  footer .content .link-boxes .input-box{
+    width: 60%;
+  }
+  .bottom-details .bottom_text span,
+  .bottom-details .bottom_text a{
+    font-size: 12px;
+  }
+   footer .content .top .link-boxes{
+    flex-wrap: wrap !important;
+  }
+  .link-boxes{
+    flex-wrap: wrap;
+  }
+}
+@media (max-width: 520px){
+  
+  footer::before{
+    top: 145px;
+  }
+  footer .content .top{
+    flex-direction: column;
+  }
+  .content .top .media-icons{
+    margin-top: 16px;
+  }
+  footer .content .link-boxes .box{
+    width: calc(100% / 2 - 10px);
+  }
+  footer .content .link-boxes .input-box{
+    width: 100%;
+  }
+  .top .link-boxes{
+    flex-wrap: wrap;
+  }
+  .link-boxes{
+    flex-wrap: wrap;
+  }
+
+}
+ @media (max-width:375px){
+  .bottom-details .bottom_text span,
+  .bottom-details .bottom_text a{
+    font-size: 8px;
+  }
+  .content .top .media-icons a{
+    height: 25px;
+    width: 25px;
+    font-size: 9px;
+    line-height: 27px;
+    overflow-x: hidden;
+    overflow-y: hidden;
+ }
+ .content .link-boxes .input-box {
+  margin-right: -4px;
+}
+ }
+
+ 
+ .buttons-6{
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 30px;
+    margin-bottom: 50px;
+ }
+
+ .buttons-6 .btn-a{
+  text-decoration: none;
+    font-size: 20px;
+    border: 2px solid #232d60;
+    color: #232d60;
+   height: 40px;
+   width: 140px;
+   line-height: 34px;
+   cursor: pointer;
+    border-radius: 5px;
+    text-align: center;
+ }
+ .buttons-6 .btn-a.active{
+    color: #fff;
+    background-color: #232d60;
+ }
+    </style>
+     <!-- Header Start -->
+    
+     <nav>
+      <div class="cc">
+        <h1>SHOPLANE</h1>
+        <h4><a id="welcome">Welcome: <script>document.write(localStorage.getItem("username"))</script> </a></h4>
+      </div>
+    <div class="nav-links" id="navLinks">
+          <i class="fa fa-times" onclick="hideMenu()"></i>
+          <ul>
+              <li><a href="./website.html">Home</a></li>
+              <li><a href="./cart.html">Services</a></li>
+              <li><a href="./contact.html">Contact Us</a></li>
+              <li><a href="./order.html">Order Histroy</a></li>
+              <li><a href="./cart2.html">Cart</a></li>
+              <li><a href="#" id="logout-link">Logout</a></li>
+          </ul>
+     
+      </div>
+      <i class="fa fa-bars" onclick="showMenu()"></i>
+    </nav> 
+  
+   <!-- Header End -->
+   <div class="buttons-6">
+    <a class="btn-a" href="./cart.html" onclick="activateButton(this);">All Products</a>
+    <a class="btn-a active" href="./carts.html" onclick="activateButton(this);">Shoes</a>
+    <a class="btn-a" href="./cartb.html" onclick="activateButton(this);">Beauty</a>
+    <a class="btn-a" href="./cartj.html" onclick="activateButton(this);">Jewellery</a>
+    <a class="btn-a" href="./cartc.html" onclick="activateButton(this);">Clothes</a>
+    <a  class="btn-a" href="./cartw.html" onclick="activateButton(this);">Watch</a>
+  </div>
+
+
+
+
+    <header>
+    
+        <input type="text" id="search" placeholder="Search products here..." >
+
+        <div class="cart-icon">
+            <a href="./cart2.html"> <!-- Open cart page in a new tab -->
+             <i   class="fa-solid fa-cart-shopping" ></i> 
+                <span class="cart-count">0</span>
+              </a>
+        </div>
+       </header>
+    <main>
+        <div class="product-list" id="product-list">
+            <!-- Product items will be added here -->
+        </div>
+    </main>
+
+    <!-- footer -->
+
+    <footer>
+        <div class="content">
+          <div class="top">
+            <div class="logo-details">
+              <i class="fab fa-slack"></i>
+              <span class="logo_name">ShopLane</span>
+            </div>
+            <div class="media-icons">
+              <a href="https://www.facebook.com"><i class="fab fa-facebook-f"></i></a>
+              <a href="https://www.twitter.com"><i class="fab fa-twitter"></i></a>
+              <a href="https://www.instagram.com"><i class="fab fa-instagram"></i></a>
+              <a href="https://www.linkedin.com"><i class="fab fa-linkedin-in"></i></a>
+              <a href="https://www.youtube.com"><i class="fab fa-youtube"></i></a>
+            </div>
+          </div>
+          <div class="link-boxes">
+            <ul class="box">
+              <li class="link_name">Company</li>
+              <li><a href="#">Home</a></li>
+              <li><a href="#">Contact us</a></li>
+              <li><a href="#">Accessories</a></li>
+              <li><a href="#">Shop now</a></li>
+            </ul>
+            <ul class="box">
+              <li class="link_name">Services</li>
+              <li><a href="#">Free delivery</a></li>
+              <li><a href="#">Good quality</a></li>
+              <li><a href="#">80% discount</a></li>
+              <li><a href="#">delivery on time</a></li>
+            </ul>
+            <ul class="box">
+              <li class="link_name">Account</li>
+              <li><a href="#">Profile</a></li>
+              <li><a href="#">My account</a></li>
+              <li><a href="#">Prefrences</a></li>
+              <li><a href="#">Purchase</a></li>
+            </ul>
+            <ul class="box">
+              <li class="link_name">Categories</li>
+              <li><a href="#">Shoes</a></li>
+              <li><a href="#">Watch</a></li>
+              <li><a href="#">Jewellery</a></li>
+              <li><a href="#">Cap</a></li>
+            </ul>
+            <ul class="box input-box">
+              <li class="link_name">shop now</li>
+              <li><input type="text" placeholder="Enter your email"></li>
+              <li><input type="button" value="shop now"></li>
+            </ul>
+          </div>
+        </div>
+        <div class="bottom-details">
+          <div class="bottom_text">
+            <span class="copyright_text">Copyright &#169; 2023 <a>CodingGirl.</a>All rights reserved</span>
+         </div>
+        </div>
+      </footer>
+
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+    const cartIcon = document.getElementById('cart-icon');
+const cartCount = document.querySelector('.cart-count');
+const productList = document.getElementById('product-list');
+const searchInput = document.getElementById('search');
+
+let cartItems = [];
+
+// Sample product data
+const products = [
+    { id: 1,  image: 'p-5.jpg', name: 'Product 1', price: 10 },
+    { id: 2,  image:'p-7.jpg',  name: 'Product 2', price: 15 },
+    { id: 3,  image:'n-4.jpg',  name: 'Product 3', price: 28 },
+    { id: 4,  image:'n-5.jpg',  name: 'Product 4', price: 57 },
+   
+    // Add more products here
+];
+
+
+
+// Function to update the cart count
+function updateCartCount() {
+    cartCount.textContent = cartItems.length;
+}
+
+// Function to render products
+function renderProducts(productArray) {
+    productList.innerHTML = '';
+
+    productArray.forEach(product => {
+        const productItem = document.createElement('div');
+        productItem.classList.add('product-item');
+        productItem.innerHTML = `
+            <img src="image/${product.image}">
+            <h3>${product.name}</h3>
+            <p>Price: $${product.price}</p>
+            <div calss="abc>"
+            <button class="add-to-cart-btn"  aria-hidden="true"   data-id="${product.id}">Add to Cart</button> 
+            <div>
+            `;
+     
+        const addToCartButton = productItem.querySelector('.add-to-cart-btn');
+        addToCartButton.addEventListener('click', () => addToCart(product));
+
+        productList.appendChild(productItem);
+    });
+}
+
+
+// is function sa 1 card 2 bar bi a rha tha is lia nicht new lgaya function
+// Function to add a product to the cart
+// function addToCart(product) {
+//     cartItems.push({ ...product, quantity: 1 });
+//     updateCartCount();
+//     updateLocalStorage();
+// }
+
+//  Function to add a product to the cart
+ function addToCart(product) {
+     const existingCartItem = cartItems.find(item => item.id === product.id);
+
+    if (existingCartItem) {
+        existingCartItem.quantity += 1;
+         } else {
+        cartItems.push({ ...product, quantity: 1 });
+    }
+
+    updateCartCount();
+   updateLocalStorage();
+ }
+
+// Function to update local storage
+function updateLocalStorage() {
+    localStorage.setItem('cartItems', JSON.stringify(cartItems));
+}
+
+// Function to search and display matching products
+ function searchProducts(query) {
+         const filteredProducts = products.filter(product =>
+        product.name.toLowerCase().includes(query.toLowerCase())
+    );
+
+     renderProducts(filteredProducts);
+ }
+
+
+
+// Load cart items from local storage on page load
+function loadCartItemsFromLocalStorage() {
+    const cartItemsJSON = localStorage.getItem('cartItems');
+    if (cartItemsJSON) {
+        cartItems = JSON.parse(cartItemsJSON);
+        updateCartCount();
+    }
+}
+
+//  Initialize the page
+ function init() {
+     loadCartItemsFromLocalStorage();
+     renderProducts(products);
+    searchInput.addEventListener('input', () => searchProducts(searchInput.value));
+ }
+
+ init();
+
+});
+
+</script>
+
+<script>
+  // js for header navbar
+
+var navLinks = document.getElementById("navLinks");
+
+function showMenu(){
+navLinks.style.right = "0";
+}
+
+function hideMenu(){
+navLinks.style.right = "-200px";
+}
+</script>
+
+<script>
+  function activateButton(button) {
+            // Remove the 'active' class from all buttons
+            const buttons = document.querySelectorAll('.btn-a');
+            buttons.forEach(btn => {
+                btn.classList.remove('active');
+            });
+
+            // Add the 'active' class to the clicked button
+            button.classList.add('active');
+        }
+</script>
+
+
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+const logoutLink = document.getElementById("logout-link");
+
+if (logoutLink) {
+  logoutLink.addEventListener("click", (event) => {
+    event.preventDefault();
+    localStorage.setItem("userLoggedIn", "false");
+    window.location.href = "login.html";
+  });
+}
+
+const userLoggedIn = localStorage.getItem("userLoggedIn");
+
+if (userLoggedIn !== "true") {
+  // If user is not logged in, redirect to login page
+  window.location.href = "login.html";
+}
+});
+
+</script>
+</body>
+</html>

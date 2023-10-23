@@ -1,0 +1,214 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Poppins", sans-serif;
+    overflow-x: hidden;
+    /* overflow-y: hidden; */
+  }
+ 
+ /* Accessories start */
+
+   #heading-2 h3{
+    margin-top: 45px;
+    font-size: 30px;
+    font-weight: 500;
+    text-align: center;
+    color: #232d60;
+   }
+
+   #heading-2 h3 span{
+    color: #ff77cd;
+   }
+
+   .main-2{
+    display: flex;
+  justify-content: space-around;
+  align-items: center;
+  }
+
+  /* Style for product gallery */
+  .product-gallery {
+    margin-top: 30px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    grid-gap: 30px;
+    grid-row-gap: 30px;
+    width: 100%;
+    transition: .3s;
+    margin-bottom: 50px;
+    padding: 20px 2px;
+    }
+
+    .product-item {
+    max-width: 200px;
+    margin: auto;
+    border-radius: 10px;
+    padding: 20px;
+    transition: .3s;
+    width: 80%;
+    background-color: #fff;
+    box-shadow: 0 .5rem 1.5rem rgba(0,0,0,.1);
+    }
+
+    .product-item:hover{
+      box-shadow: 0 0 10px #666;
+    scale: 1.05;
+    }
+    .product-item h4, .product-item p{
+      text-align: center;
+      font-size: 1.2rem;
+    }
+
+    .product-item img{
+    max-width: 100%;
+    object-fit: contain;
+    height: 15rem;
+    }
+
+    .product-item button{
+  width: 85%;
+  height: 40px;
+  justify-content: center;
+  display: block;
+  color:#fff;
+  background: linear-gradient(45deg, #87adfe, #ff77cd);
+  font-size: .8em;
+  font-weight: bold;
+  margin: 10px;
+  outline: none;
+  border: none;
+  border-radius: 5px;
+  transition: .5s ease-in;
+  cursor: pointer;
+    }
+
+    /* Style for filter buttons */
+    .filter-buttons {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 20px;
+      margin-top: 30px;
+    }
+
+  .filter-button {
+  width: 84px;
+  height: 40px;
+  justify-content: center;
+  display: block;
+  color:#fff;
+  background: linear-gradient(45deg, #87adfe, #ff77cd);
+  font-size: .8em;
+  font-weight: bold;
+  margin: 10px;
+  outline: none;
+  border: none;
+  border-radius: 5px;
+  transition: .5s ease-in;
+  cursor: pointer;
+    }
+
+    /* Style for shopping cart */
+    .mine{
+    display: flex;
+    justify-content: center;
+    }
+   .shopping-cart {
+      border: 2px solid #fff;
+      padding: 10px;
+      max-width: 300px;
+      cursor: pointer;
+      background: linear-gradient(45deg, #87adfe, #ff77cd);
+      color: #fff;
+      border-radius: 10px;
+       position: absolute; 
+      /* position: fixed; */
+      /* top: 135vh; */
+      top: 30vh;
+      width: 100%;
+      transform: translateX(100%);
+      height: auto;
+      right: 0;
+  }
+
+    .cart-item {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 5px;
+    }
+
+    #cartItems{
+      border-bottom: 2px solid #fff;
+    }
+
+
+
+      /* Media query for Accessories  */
+
+      @media(max-width: 1024px){
+        .icon i{
+          position: absolute;
+          right: 132px;
+        }
+
+  @media(max-width: 1050px){
+    .filter-buttons{
+      display: flex;
+      flex-direction: column;
+      width: 200%;
+      justify-content: center !important;
+    }
+
+  }
+
+    /* @media(max-width: 860px){
+   .shopping-cart {
+    position: absolute;
+    top: 175vh;
+   }
+  }   */
+  
+  @media(max-width: 660px){
+    .filter-buttons{
+      display: flex;
+      flex-direction: column;
+      width: 324%;
+      justify-content: center;
+    }
+    .icon i{
+      position: absolute;
+      right: 132px;
+    }
+ }
+   
+  /* @media(max-width: 600px){
+  .shopping-cart {
+   position: absolute;
+   top: 160vh;
+  }
+ }   */
+
+ @media(max-width: 400px){
+    .filter-buttons{
+      display: flex;
+      flex-direction: column;
+      width: 502%;
+      justify-content: center;
+    }
+    .shopping-cart {
+      max-width: 200px;
+
+      /* height: 100vh; */
+     }
+ }
+ @media(max-width: 320px){
+  .icon i{
+    position: absolute;
+    right: 77px;
+  }
+  .shopping-cart {
+    max-width: 150px;
+    font-size: 10px;
+   }
+}
+      }

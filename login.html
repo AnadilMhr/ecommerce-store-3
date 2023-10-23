@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="forms.css">
+  <link rel="stylesheet" href="model2.css">
+  <!-- <script src="s.js" defer></script> -->
+  <title>Login</title>
+</head>
+<body>
+
+  <div id="errorModal" class="modal">
+    <div class="modal-content">
+    <p id="errorText"></p>
+      <button id="modalOkButton">OK</button>
+    </div>
+  </div>
+
+
+
+
+  <div class="main2">
+  <div class="form-container2">
+    <h1>Login</h1>
+    <form id="login-form">
+      <input type="email" id="login-email" placeholder="Email" required autocomplete="off">
+      <input type="password" id="login-password" placeholder="Password" required autocomplete="off">
+      <button type="submit" id="login-button" class="btn-1">Login</button>
+    </form>
+    <div class="info">
+      <h4>don't have an account?<span><a href="./index.html">Sign up here</a></span></h4> 
+     </div>
+    <p id="login-error" class="error"></p>
+  </div>
+ </div>
+
+ <script src="./st.js"></script>   
+ <!-- <script src="./sl.js"></script>  -->
+</body>
+</html>
