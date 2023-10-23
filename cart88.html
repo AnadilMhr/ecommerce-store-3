@@ -818,19 +818,6 @@ header .cart-count{
                   </footer>
 
 <script>
-  document.addEventListener("DOMContentLoaded", function () {
-    const cartIcon = document.getElementById('cart-icon');
-    const cartCount = document.querySelector('.cart-count');
-    const productList = document.getElementById('product-list');
-    const searchInput = document.getElementById('search');
-    const tabButtons = document.querySelectorAll('.btn-a');
-
-    let cartItems = [];
-    let products = loadProductsFromLocalStorage(); // All products (including category)
-    let currentCategory = "All Products"; // Default category
-    let searchQuery = ''; // Initialize the search query
-    let deletedProductIds = JSON.parse(localStorage.getItem('deletedProductIds')) || [];
-
    
  // Sample product data with category property
     const allProducts = [
@@ -856,6 +843,24 @@ header .cart-count{
 { id: 20, category: "Watch", image:'n-9-min_11zon.jpg',  name: 'Rolex Watch', price: 73 },
         // Add more products here with category property
     ];
+
+
+
+    
+  document.addEventListener("DOMContentLoaded", function () {
+    const cartIcon = document.getElementById('cart-icon');
+    const cartCount = document.querySelector('.cart-count');
+    const productList = document.getElementById('product-list');
+    const searchInput = document.getElementById('search');
+    const tabButtons = document.querySelectorAll('.btn-a');
+
+    let cartItems = [];
+    let products = loadProductsFromLocalStorage(); // All products (including category)
+    let currentCategory = "All Products"; // Default category
+    let searchQuery = ''; // Initialize the search query
+    let deletedProductIds = JSON.parse(localStorage.getItem('deletedProductIds')) || [];
+
+
 
   // Function to update local storage with all products
   function updateLocalStorageWithProducts(products) {
