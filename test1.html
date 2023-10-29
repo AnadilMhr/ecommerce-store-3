@@ -1160,8 +1160,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
    // Function to update the cart count
    function updateCartCount() {
-      const cartCountValue = cartItems.length >= 10 ? '9+' : cartItems.length.toString();
-      cartCount.textContent = cartCountValue;
+     cartCount.textContent = "";
     }
 
     // Function to handle product deletion
@@ -1185,11 +1184,9 @@ document.addEventListener("DOMContentLoaded", function () {
       productList.innerHTML = '';
 
       const filteredProducts = products.filter(product =>
-    (currentCategory === "All Products" || product.category === currentCategory) || 
-    (product.category === "All Products" && product.name.toLowerCase().includes(searchQuery.toLowerCase())) &&
-        // (currentCategory === "All Products" || product.category === currentCategory) &&
-        // (product.name.toLowerCase().includes(searchQuery.toLowerCase())) &&
-        !deletedProductIds.includes(product.id) // Exclude deleted products
+      (currentCategory === "All Products" || product.category === currentCategory) &&
+    (product.name.toLowerCase().includes(searchQuery.toLowerCase())) &&
+    !deletedProductIds.includes(product.id) // Exclude deleted products
       );
 
       filteredProducts.forEach(product => {
@@ -1200,16 +1197,13 @@ document.addEventListener("DOMContentLoaded", function () {
           <h3>${product.name}</h3>
           <p>Price: $${product.price}</p>
           <div class="abc">
-            <button class="add-to-cart-btn" aria-hidden="true" data-id="${product.id}">Add to Cart</button>
-          </div>
+        <!-- No "Add to Cart" button -->
+      </div>
           <div class=m-del>
             <button class="del-b" data-id="${product.id}">Delete</button>
             </div>
         `;
-        // <button class="update-btn" data-id="${product.id}">Update</button>
-        const addToCartButton = productItem.querySelector('.add-to-cart-btn');
-        addToCartButton.addEventListener('click', () => addToCart(product));
-
+   
         const deleteButton = productItem.querySelector('.del-b');
         deleteButton.addEventListener('click', () => handleProductDeletion(product.id));
 
