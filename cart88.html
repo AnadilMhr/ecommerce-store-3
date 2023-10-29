@@ -868,14 +868,16 @@ header .cart-count{
     }
 
     // Function to load all products from local storage
-    function loadProductsFromLocalStorage() {
+     function loadProductsFromLocalStorage() {
       const productsJSON = localStorage.getItem('allProducts');
       if (productsJSON) {
         return JSON.parse(productsJSON);
       } else {
+        localStorage.setItem('products', JSON.stringify(allProducts));
         return allProducts;
       }
     }
+
 
     // Function to add a product to the products array
     function addProductToProducts(newProduct) {
@@ -910,27 +912,39 @@ header .cart-count{
         productList.innerHTML = '';
 
         const filteredProducts = products.filter(product =>
-        (currentCategory === "All Products" || product.category === currentCategory) || 
-       (product.category === "All Products" && product.name.toLowerCase().includes(searchQuery.toLowerCase())) &&
-       !deletedProductIds.includes(product.id)
+        (currentCategory === "All Products" || product.category === currentCategory) &&
+        (product.name.toLowerCase().includes(searchQuery.toLowerCase())) &&
+        !deletedProductIds.includes(product.id) // Exclude deleted products
         );
 
       filteredProducts.forEach(product => {
             const productItem = document.createElement('div');
             productItem.classList.add('product-item');
             productItem.innerHTML = `
-                <img src="image/${product.image}">
-                <h3>${product.name}</h3>
-                <p>Price: $${product.price}</p>
-                <div class="abc">
-                    <button class="add-to-cart-btn" aria-hidden="true" data-id="${product.id}">Add to Cart</button>
+                <a href="detail.html" data-id="${product.id}">
+            <img src="image/${product.image}">
+            <h3>${product.name}</h3>
+            <p>Price: $${product.price}</p>
+            </a>
+             <div class="abc">
+          <button class="add-to-cart-btn" aria-hidden="true" data-id="${product.id}">Add to Cart</button>
                 </div>
             `;
 
             const addToCartButton = productItem.querySelector('.add-to-cart-btn');
             addToCartButton.addEventListener('click', () => addToCart(product));
+          
+          
+productItem.addEventListener('click', () => openProductDetail(product));
+   // Function to handle product card click
+   function openProductDetail(product) {
+    // Store the selected product ID in local storage
+    localStorage.setItem('selectedProduct', product.id);
 
-            productList.appendChild(productItem);
+    // Navigate to the product detail page
+    window.location.href = 'detail.html';
+}
+    productList.appendChild(productItem);
         });
     }
 
