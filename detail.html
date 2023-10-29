@@ -815,6 +815,29 @@ footer .bottom-details .bottom_text{
   });
 </script>
 
+    <script>
+    // js for logout
+    document.addEventListener("DOMContentLoaded", () => {
+  const logoutLink = document.getElementById("logout-link");
+
+  if (logoutLink) {
+    logoutLink.addEventListener("click", (event) => {
+      event.preventDefault();
+      localStorage.setItem("userLoggedIn", "false");
+      window.location.href = "login.html";
+    });
+  }
+
+  const userLoggedIn = localStorage.getItem("userLoggedIn");
+
+  if (userLoggedIn !== "true") {
+    // If user is not logged in, redirect to login page
+    window.location.href = "login.html";
+  }
+});
+
+  </script>
+
 </body>
 </html>
 
