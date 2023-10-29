@@ -1123,38 +1123,41 @@ document.addEventListener("DOMContentLoaded", function () {
       updateLocalStorageWithProducts(products);
     }
 
+
     // Function to handle the creation of a new product
-    createProductBtn.addEventListener("click", function () {
-      const productName = document.getElementById("productName").value;
-      const productPrice = document.getElementById("productPrice").value;
-      const productCategory = document.getElementById("productCategory").value; 
-      const productImageInput = document.getElementById("productImage");
+createProductBtn.addEventListener("click", function () {
+  const productName = document.getElementById("productName").value;
+  const productPriceInput = document.getElementById("productPrice");
+  const productPrice = parseFloat(productPriceInput.value);
+  const productCategory = document.getElementById("productCategory").value;
+  const productImageInput = document.getElementById("productImage");
 
-      if (productName.trim() === "" || productPrice.trim() === "" || productImageInput.files.length === 0) {
-        alert("Please fill in all fields.");
-        return;
-      }
+  if (productName.trim() === "" || isNaN(productPrice) || productImageInput.files.length === 0) {
+    alert("Please fill in all fields, and make sure the price is a valid number.");
+    return;
+  }
 
-      const productImageFile = productImageInput.files[0];
+  const productImageFile = productImageInput.files[0];
 
-      const newProduct = {
-        id: new Date().getTime(),
-        name: productName,
-        price: parseFloat(productPrice),
-        image: productImageFile.name,
-        category: productCategory,
-      };
+  const newProduct = {
+    id: new Date().getTime(),
+    name: productName,
+    price: productPrice, // Use the parsed float value
+    image: productImageFile.name,
+    category: productCategory,
+  };
 
-      addProductToProducts(newProduct);
+  addProductToProducts(newProduct);
 
-      document.getElementById("productName").value = "";
-      document.getElementById("productPrice").value = "";
-      document.getElementById("productCategory").value = "All Products";
-      document.getElementById("productImage").value = "";
+  document.getElementById("productName").value = "";
+  productPriceInput.value = ""; // Clear the price field
+  document.getElementById("productCategory").value = "All Products";
+  document.getElementById("productImage").value = "";
 
-      alert("Product added successfully!");
-      renderProducts(); 
-    });
+  alert("Product added successfully!");
+  renderProducts();
+});
+
 
     // ... (Rest of your code remains unchanged)
 
