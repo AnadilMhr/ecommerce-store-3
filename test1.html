@@ -85,16 +85,14 @@ header .cart-count{
     position: absolute;
     top: 15px;
     padding: 3px 0px 0px 4px;
-    /* right: 102px; */
+ 
     font-size: 15px;
-
+    /* background-color: red; */
     height: 24px;
     width: 24px;
     overflow-y: hidden;
     border-radius: 50%;
-    /* display: flex;
-    justify-content: center;
-    align-items: center; */
+    
 }
 
 @media(max-width:427px){
@@ -288,7 +286,7 @@ header .cart-count{
 
   .m-del{
     display: flex;
-    /* justify-content: space-around;  */
+    justify-content: space-around;  
     align-items: center;
   }
 
@@ -297,14 +295,14 @@ header .cart-count{
     color: #fff;
     border: none;
     border-radius: 5px;
-    padding: 10px 70px;
+    padding: 7px 22px;
     cursor: pointer;
     margin-top: 16px;
     text-align: center;
     transition: background-color 0.3s;  
   }
     
-  .update-btn{
+  #edit-btn{
     background-color:green ;
     color: #fff;
     border: none;
@@ -794,7 +792,7 @@ option{
    left: 0;
    z-index: 1200;
    width: 100%;
-   display: none; 
+   display: none;    
  }
 
 
@@ -807,7 +805,7 @@ option{
     border-radius: 10px;
     text-align: center;
     color: #fff;
- }
+  }
 
  .ec-btn{
   padding: 5px 18px;
@@ -827,19 +825,13 @@ option{
                <!-- <h4><a id="welcome">Welcome: <span id="welcomeUsername"></span></a></h4> -->
               </div>
           
-               <!-- <nav class="navbar" id="navbar">
-                  <i id="bar-1" class="fa fa-times" onclick="hideMenu()"></i>
-                  <a href="./website.html">Home</a>
-                  <a href="./cart88.html">Services</a>
-                  <a href="./contact.html">Contact Us</a>
-                  <a href="./order.html">Order Histroy</a>
-                 
-               </nav> -->
           
                  <div class="icons">
                   <div class="cart-icon">
                     <a href="#"> 
-                   </a>
+                     <!-- <i   class="fa-solid fa-cart-shopping" ></i>  -->
+                        <span class="cart-count">0</span>
+                      </a>
                 </div> 
                
                   <a href="#" id="logout-link"  class="fas fa-sign-out"></a>
@@ -864,11 +856,14 @@ option{
                 <option value="Clothes">Clothes</option>
                 <option value="Watch">Watch</option>
               </select>
+             
               <input type="file" id="productImage" accept="image/*">
-             </div>
+               </div>
              <button class="pd-btn"  id="createProductBtn" >Add Product</button> 
             </div>
          <!-- add product -->
+  <!-- <input type="file" id="productImage" accept="image/jpg, image/jpeg, image/png"> -->
+           
 
          <div id="header-2">
             
@@ -917,12 +912,12 @@ option{
               </select>
               <input type="file" id="productImage2" accept="image/*">
               </div>
-              <button class="ec-btn" id= "editProductBtn">Update</button> 
-              <button class="ec-btn">Cancel</button>
+              <button class="ec-btn" id="cancelUpdateBtn">Cancel</button> 
              </div>
              </div>
 
-
+             <!-- <button class="ec-btn" id= "editProductBtn">Update</button> 
+             <button class="ec-btn" id="cancelUpdateBtn">Cancel</button> -->
                  <!-- banner 2 new -->
      <div class="main-bb">
       <div id="Banner">
@@ -1052,10 +1047,8 @@ document.addEventListener("DOMContentLoaded", function () {
 </script>
 
 
-
 <script>
-
-    // Sample product data with category property
+   // Sample product data with category property
     const allProducts = [
       // Your existing product data
       { id: 1, category: "Shoes", image: 'p-5-min_11zon.jpg', name: 'Men Shoe', price: 10 },
@@ -1078,7 +1071,9 @@ document.addEventListener("DOMContentLoaded", function () {
 { id: 18, category: "Watch", image:'p-w9-min_11zon.jpg',  name: 'Stylish Watch', price: 105 },
 { id: 19, category: "Watch", image:'p-w1-min_11zon.jpg',  name: 'Longines Watch', price: 64 },
 { id: 20, category: "Watch", image:'n-9-min_11zon.jpg',  name: 'Rolex Watch', price: 73 },
-    ];
+    ]
+
+
 
 
 
@@ -1092,12 +1087,17 @@ document.addEventListener("DOMContentLoaded", function () {
     const createProductBtn = document.getElementById("createProductBtn");
     const updateProductBtn = document.getElementById("editProductBtn");
     const updateForm = document.getElementById("update-form");
+    const editButton = document.getElementById("edit-btn");
+
+
+  
 
     let cartItems = [];
     let products = loadProductsFromLocalStorage();
     let currentCategory = "All Products"; // Default category
     let searchQuery = ''; // Initialize the search query
     let deletedProductIds = JSON.parse(localStorage.getItem('deletedProductIds')) || [];
+
 
 
     // Function to update local storage with all products
@@ -1121,47 +1121,50 @@ document.addEventListener("DOMContentLoaded", function () {
       updateLocalStorageWithProducts(products);
     }
 
-
-    // Function to handle the creation of a new product
+   
+  
+// Function to handle the creation of a new product
 createProductBtn.addEventListener("click", function () {
-  const productName = document.getElementById("productName").value;
-  const productPriceInput = document.getElementById("productPrice");
-  const productPrice = parseFloat(productPriceInput.value);
-  const productCategory = document.getElementById("productCategory").value;
-  const productImageInput = document.getElementById("productImage");
+      const productName = document.getElementById("productName").value;
+      const productPrice = document.getElementById("productPrice").value;
+      const productCategory = document.getElementById("productCategory").value; 
+      const productImageInput = document.getElementById("productImage");
 
-  if (productName.trim() === "" || isNaN(productPrice) || productImageInput.files.length === 0) {
-    alert("Please fill in all fields, and make sure the price is a valid number.");
-    return;
-  }
+      if (productName.trim() === "" || productPrice.trim() === "" || productImageInput.files.length === 0) {
+        alert("Please fill in all fields.");
+        return;
+      }
 
-  const productImageFile = productImageInput.files[0];
+      const productImageFile = productImageInput.files[0];
 
-  const newProduct = {
-    id: new Date().getTime(),
-    name: productName,
-    price: productPrice, // Use the parsed float value
-    image: productImageFile.name,
-    category: productCategory,
-  };
+      const newProduct = {
+        id: new Date().getTime(),
+        name: productName,
+        price: parseFloat(productPrice),
+        image: productImageFile.name,
+        category: productCategory,
+      };
 
-  addProductToProducts(newProduct);
+      addProductToProducts(newProduct);
 
-  document.getElementById("productName").value = "";
-  productPriceInput.value = ""; // Clear the price field
-  document.getElementById("productCategory").value = "All Products";
-  document.getElementById("productImage").value = "";
+      document.getElementById("productName").value = "";
+      document.getElementById("productPrice").value = "";
+      document.getElementById("productCategory").value = "All Products";
+      document.getElementById("productImage").value = "";
 
-  alert("Product added successfully!");
-  renderProducts();
-});
+      alert("Product added successfully!");
+      renderProducts(); 
+    });
 
 
-    // ... (Rest of your code remains unchanged)
+
+
+
+   // ... (Rest of your code remains unchanged)
 
    // Function to update the cart count
    function updateCartCount() {
-     cartCount.textContent = "";
+    cartCount.textContent = "";
     }
 
     // Function to handle product deletion
@@ -1180,37 +1183,41 @@ createProductBtn.addEventListener("click", function () {
       renderProducts();
     }
 
-    // Function to render products based on the selected category and search query
-    function renderProducts() {
-      productList.innerHTML = '';
+    
+ // Function to render products based on the selected category and search query
+function renderProducts() {
+  productList.innerHTML = '';
 
-      const filteredProducts = products.filter(product =>
-      (currentCategory === "All Products" || product.category === currentCategory) &&
+  const filteredProducts = products.filter(product =>
+    (currentCategory === "All Products" || product.category === currentCategory) &&
     (product.name.toLowerCase().includes(searchQuery.toLowerCase())) &&
     !deletedProductIds.includes(product.id) // Exclude deleted products
-      );
+  );
 
-      filteredProducts.forEach(product => {
-        const productItem = document.createElement('div');
-        productItem.classList.add('product-item');
-        productItem.innerHTML = `
-          <img src="image/${product.image}">
-          <h3>${product.name}</h3>
-          <p>Price: $${product.price}</p>
-          <div class="abc">
+  filteredProducts.forEach(product => {
+    const productItem = document.createElement('div');
+    productItem.classList.add('product-item');
+    productItem.innerHTML = `
+    <img src="image/${product.image}">
+      <h3>${product.name}</h3>
+      <p>Price: $${product.price}</p>
+      <div class="abc">
         <!-- No "Add to Cart" button -->
       </div>
-          <div class=m-del>
-            <button class="del-b" data-id="${product.id}">Delete</button>
-            </div>
-        `;
-   
-        const deleteButton = productItem.querySelector('.del-b');
-        deleteButton.addEventListener('click', () => handleProductDeletion(product.id));
+      <div class="m-del">
+        <button class="del-b" data-id="${product.id}">Delete</button>
+        <button id="edit-btn" data-id="${product.id}">Edit</button>
+      </div>
+    `;
 
-        productList.appendChild(productItem);
-      });
-    }
+    const deleteButton = productItem.querySelector('.del-b');
+    deleteButton.addEventListener('click', () => handleProductDeletion(product.id));
+
+    productList.appendChild(productItem);
+  });
+}
+
+
 
     // Function to handle tab button click
     function handleTabButtonClick(event) {
@@ -1251,16 +1258,16 @@ createProductBtn.addEventListener("click", function () {
 
     // Load cart items from local storage on page load
     function loadCartItemsFromLocalStorage() {
-      const cartItemsJSON = localStorage.getItem('cartItems');
-      if (cartItemsJSON) {
-        cartItems = JSON.parse(cartItemsJSON);
-        updateCartCount();
-      }
-    }
+  const cartItemsJSON = localStorage.getItem('cartItems');
+  if (cartItemsJSON) {
+    cartItems = JSON.parse(cartItemsJSON);
+    // Only display the cart icon without the count
+    updateCartCount();
+  }
+}
 
- 
 
-    // Initialize the page
+   // Initialize the page
     function init() {
       loadCartItemsFromLocalStorage();
         // Check for deleted product IDs and filter the products
@@ -1274,20 +1281,11 @@ createProductBtn.addEventListener("click", function () {
       searchInput.addEventListener('input', () => {
         searchQuery = searchInput.value;
         renderProducts();
-      });
+    });
     }
 
     init();
   });
 </script>
-
-
- 
-
-
-
-
-
-  
 </body>
 </html>
