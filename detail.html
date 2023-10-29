@@ -1,0 +1,773 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Details</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+<body>
+   <style>
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+  overflow-x: hidden;
+  text-decoration: none;
+  /* overflow-y: hidden; */
+}
+body, h1, p {
+    margin: 0;
+    padding: 0;
+    background-color: black;
+}
+        /* header */
+        header{
+    display: flex;
+    padding: 0.9rem 5%;
+    justify-content: space-between;
+    /* margin-bottom: 50px; */
+    align-items: center;  
+    background-color: #13131a;  
+}
+
+header .logo{
+    font-weight: bold;
+    font-size: 1.5rem;
+    color: red;
+}
+
+header .navbar a{
+    font-size: 1rem;
+    padding: 0 1.5rem;
+    color: #fff;
+    cursor: pointer;
+    transition: .5s;
+}
+
+header .navbar a:hover{
+    color: red;
+}
+
+header .icons a{
+    font-size: 1.5rem;
+    margin-left: 2rem;
+    color: #fff;
+}
+
+header #bar{
+    color: #fff;
+    font-size: 1.5rem;
+    display: none; 
+}
+
+header #bar-1{
+    color:black;
+    font-size: 1.5rem;
+    display: none;
+}
+header .icons{
+  display: flex;
+}
+
+#welcome{
+  font-weight: 500;
+  color: #fff;
+ font-size: 30px;
+ }
+
+ .col{
+  display: flex;
+  flex-direction: column;
+  
+ }
+
+header .cart-count{
+    position: absolute;
+    top: 15px;
+    padding: 3px 0px 0px 4px;
+    /* right: 102px; */
+    font-size: 15px;
+    background-color: red;
+    height: 24px;
+    width: 24px;
+    overflow-y: hidden;
+    border-radius: 50%;
+    /* display: flex;
+    justify-content: center;
+    align-items: center; */
+}
+
+@media(max-width:427px){
+  header .cart-count{
+    font-size: 11px;
+    height: 18px;
+    width: 18px;
+  }
+}
+
+@media (max-width:425px){
+  #welcome{
+    font-size: 19px;
+  }
+ }
+
+@media(max-width: 940px){
+  
+    header #bar{
+      display: block;
+      cursor: pointer;
+    }
+    header #bar-1{
+        display: block;
+        cursor: pointer;
+        margin-left: 10px;
+        margin-top: 10px;
+    }
+     header .navbar{
+       position: absolute;
+       background:#fff;
+       height: 100vh;
+       width: 200px;
+       top: 0;
+       right: -200px;
+       text-align: left;
+       /* z-index: 2; */
+       z-index: 9999;
+       transition: 1s;
+     }
+      header .navbar a{
+      color: black;
+      margin: 10px;
+      display: flex;
+      font-size: 17px;
+ }
+    
+  }
+
+@media(max-width:370px){
+  header .logo{
+    font-size:1.5rem
+  }
+  header .icons a{
+    font-size: 1rem;
+    margin-left:1.5rem
+  }
+  header #bar{
+    font-size:1rem
+  }
+}
+
+/* Style the product details container */
+.product-details {
+    max-width: 500px;
+    margin: 20px auto;
+    padding: 20px;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-start;
+}
+
+/* Style the product image (left column) */
+#product-image {
+    max-width: 100%;
+    height: auto;
+}
+
+/* Style the product information (right column) */
+#product-name {
+    font-size: 24px;
+    color: #fff;
+    margin-top: 10px;
+    flex: 1; /* Allow the right column to grow and take available space */
+}
+
+/* Style the product price (right column) */
+#product-price {
+    font-size: 20px;
+    margin-bottom: 10px;
+    color: #fff; /* Customize the color as needed */
+    margin-top: 10px;
+    flex: 1; /* Allow the right column to grow and take available space */
+}
+
+.l-d{
+    color: #fff;
+    font-size: 21px;
+    margin-bottom: 10px;
+    font-weight: 400;
+}
+
+.lorem{
+    color: #777;
+    font-size: 15px;
+}
+
+
+/* Add media queries for responsiveness */
+@media (max-width: 768px) {
+    .product-details {
+        padding: 10px;
+        flex-direction: column; /* Stack columns on smaller screens */
+    }
+
+    /* Adjust the image size for smaller screens if needed */
+    #product-image {
+        max-width: 100%;
+    }
+}
+
+
+/* footer */
+footer{
+  /* position: fixed; */
+  background: #13131a;
+  width: 100%;
+  /* bottom: 0;
+  left: 0; */
+}
+/* footer::before{
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 100px;
+  height: 1px;
+  width: 100%;
+  background: #AFAFB6;
+} */
+footer .content{
+  max-width: 1250px;
+  margin: auto;
+  padding: 30px 40px 40px 40px;
+}
+footer .content .top{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 50px;
+}
+.content .top .logo-details{
+  color: #fff;
+  font-size: 30px;
+}
+.content .top .media-icons{
+  display: flex;
+}
+.content .top .media-icons a{
+  height: 40px;
+  width: 40px;
+  margin: 0 8px;
+  border-radius: 50%;
+  text-align: center;
+  line-height: 40px;
+  color: #fff;
+  font-size: 17px;
+  text-decoration: none;
+  transition: all 0.4s ease;
+}
+.top .media-icons a:nth-child(1){
+  background: #4267B2;
+}
+.top .media-icons a:nth-child(1):hover{
+  color: #4267B2;
+  background: #fff;
+}
+.top .media-icons a:nth-child(2){
+  background: #1DA1F2;
+}
+.top .media-icons a:nth-child(2):hover{
+  color: #1DA1F2;
+  background: #fff;
+}
+.top .media-icons a:nth-child(3){
+  background: #E1306C;
+}
+.top .media-icons a:nth-child(3):hover{
+  color: #E1306C;
+  background: #fff;
+}
+.top .media-icons a:nth-child(4){
+  background: #0077B5;
+}
+.top .media-icons a:nth-child(4):hover{
+  color: #0077B5;
+  background: #fff;
+}
+.top .media-icons a:nth-child(5){
+  background: #FF0000;
+}
+.top .media-icons a:nth-child(5):hover{
+  color: #FF0000;
+  background: #fff;
+}
+footer .content .link-boxes{
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+footer .content .link-boxes .box{
+   width: calc(100% / 5 - 10px); 
+}
+.content .link-boxes .box .link_name{
+  color: #fff;
+  font-size: 18px;
+  font-weight: 400;
+  margin-bottom: 10px;
+  position: relative;
+}
+/* .link-boxes .box .link_name::before{
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: -2px;
+  height: 2px;
+  width: 35px;
+  background: #fff;
+} */
+.content .link-boxes .box li{
+  margin: 6px 0;
+  list-style: none;
+}
+.content .link-boxes .box li a{
+  color: #fff;
+  font-size: 14px;
+  font-weight: 400;
+  text-decoration: none;
+  opacity: 0.8;
+  transition: all 0.4s ease
+}
+.content .link-boxes .box li a:hover{
+  opacity: 1;
+  text-decoration: underline;
+}
+.content .link-boxes .input-box{
+  margin-right: 55px;
+}
+.link-boxes .input-box input{
+  height: 40px;
+  /* width: calc(100% + 55px); */
+  outline: none;
+  border: 2px solid #AFAFB6;
+  background: transparent;
+  border-radius: 4px;
+  padding: 0 10px;
+  font-size: 15px;
+  color: #fff;
+  margin-top: 5px;
+}
+.link-boxes .input-box input::placeholder{
+  color: #AFAFB6;
+  font-size: 16px;
+}
+.link-boxes .input-box input[type="button"]{
+  background: #fff;
+  color:#13131a;
+  border: none;
+  font-size: 18px;
+  font-weight: 500;
+  margin: 4px 0;
+  opacity: 0.8;
+  cursor: pointer;
+  transition: all 0.4s ease;
+}
+.input-box input[type="button"]:hover{
+  opacity: 1;
+}
+footer .bottom-details{
+  width: 100%;
+  background:#13131a;
+}
+footer .bottom-details .bottom_text{
+  max-width: 1250px;
+  margin: auto;
+  padding: 20px 40px;
+  display: flex;
+  justify-content: center;
+}
+.bottom-details .bottom_text span,
+.bottom-details .bottom_text a{
+  font-size: 14px;
+  font-weight: 500;
+  color: #fff;
+  /* opacity: 0.8; */
+  text-decoration: none;
+}
+.bottom-details .bottom_text a:hover{
+  opacity: 1;
+  text-decoration: underline;
+}
+.bottom-details .bottom_text a{
+  margin-right: 10px;
+}
+/* Footer */
+
+
+/* Footer */
+
+@media (max-width: 900px) {
+  footer .content .top .link-boxes { 
+    flex-wrap: wrap !important;   
+  }
+  footer .content .link-boxes .input-box{
+    width: 40%;
+    margin-top: 10px;
+  }
+
+  .top .link-boxes{
+    flex-wrap: wrap;
+  }
+  .link-boxes{
+    flex-wrap: wrap;
+  }
+}
+@media (max-width: 700px){
+  footer{
+    position: relative;
+  } footer .content .top{
+    flex-direction: column;
+  }
+
+  .content .top .logo-details{
+    font-size: 26px;
+  }
+  .content .top .media-icons a{
+    height: 35px;
+    width: 35px;
+    font-size: 14px;
+    line-height: 35px;
+  }
+  footer .content .link-boxes .box{
+    width: calc(100% / 3 - 10px);
+  }
+  footer .content .link-boxes .input-box{
+    width: 60%;
+  }
+  .bottom-details .bottom_text span,
+  .bottom-details .bottom_text a{
+    font-size: 12px;
+  }
+   footer .content .top .link-boxes{
+    flex-wrap: wrap !important;
+  }
+  .link-boxes{
+    flex-wrap: wrap;
+  }
+}
+@media (max-width: 520px){
+  
+  footer::before{
+    top: 145px;
+  }
+  footer .content .top{
+    flex-direction: column;
+  }
+  .content .top .media-icons{
+    margin-top: 16px;
+  }
+  footer .content .link-boxes .box{
+    width: calc(100% / 2 - 10px);
+  }
+  footer .content .link-boxes .input-box{
+    width: 100%;
+  }
+  .top .link-boxes{
+    flex-wrap: wrap;
+  }
+  .link-boxes{
+    flex-wrap: wrap;
+  }
+
+}
+ @media (max-width:375px){
+  .bottom-details .bottom_text span,
+  .bottom-details .bottom_text a{
+    font-size: 8px;
+  }
+  .content .top .media-icons a{
+    height: 25px;
+    width: 25px;
+    font-size: 9px;
+    line-height: 27px;
+    overflow-x: hidden;
+    overflow-y: hidden;
+ }
+ .content .link-boxes .input-box {
+  margin-right: -4px;
+}
+
+ }
+
+
+ /* client review */
+      /* Reset default styles */
+      body, h1, p {
+            margin: 0;
+            padding: 0;
+        }
+
+        /* Create a container for the review cards */
+        .review-cards {
+        display: flex;
+        flex-wrap: wrap;
+        column-gap: 55px;
+        row-gap: 20px;
+       margin: 0 auto;
+       padding: 20px 60px;
+       margin-bottom: 30px;
+       margin-top: 30px;
+    }
+
+        /* Style the individual review card */
+        .review-card {
+            background-color: #13131a;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            padding: 20px;
+            /* flex: 1;  */
+            max-width: calc(50% - 20px); 
+        }
+
+        /* Style the review rating */
+        .rating {
+            margin-top: -10px;
+    margin-bottom: 5px;
+            font-size: 24px;
+            color: #FFD700; /* Gold color for stars */
+        }
+
+        /* Style the review name */
+        .review-name {
+            font-weight: bold;
+            margin: 10px 0;
+            color: #fff;
+        }
+
+        /* Style the review description */
+        .review-description {
+            font-size: 16px;
+            color: #777;
+        }
+
+        /* Media query for responsiveness */
+        @media (max-width: 768px) {
+            .review-card {
+                max-width: calc(100% - 20px); /* One card per line on smaller screens */
+            }
+        }
+    
+
+   </style>
+
+<header>
+    <div class="col"> 
+     <a href="#" class="logo">ShopLane</a>
+     <h4><a id="welcome">Welcome: <span id="welcomeUsername"></span></a></h4>
+    </div>
+
+     <nav class="navbar" id="navbar">
+        <i id="bar-1" class="fa fa-times" onclick="hideMenu()"></i>
+        <a href="./website.html">Home</a>
+        <a href="./cart88.html">Products</a>
+        <a href="./contact.html">Contact Us</a>
+        <a href="./order.html">Order Histroy</a>
+        <!-- <a href="./cart2.html">Cart</a>
+        <a href="#" id="logout-link">Logout</a> -->
+     </nav>
+
+      <div class="icons">
+        <div class="cart-icon">
+          <a href="./cart2.html"> <!-- Open cart page in a new tab -->
+           <i   class="fa-solid fa-cart-shopping" ></i> 
+              <span class="cart-count">0</span>
+            </a>
+      </div>
+        <!-- <a href="" class="fas fa-shopping-cart"></a> -->
+        <a href="#" id="logout-link"  class="fas fa-sign-out"></a>
+      </div>
+
+     <i class="fa fa-bars" id="bar" onclick="showMenu()"></i>
+    </header>
+       <!-- Header End -->
+
+       <!-- product detail html -->
+    <div class="product-details">
+        <div class="main-det">
+        <div class="p-image">
+            <img id="product-image" src="" alt="Product Image">
+        </div>
+       
+        <div class="p-det">
+            <h1 id="product-name"></h1>
+        <p id="product-price"></p>
+        <h2 class="l-d">Product details</h2> 
+        <p class="lorem">This dolor sit amet consectetur, adipisicing elit. Vero rerum a and, reiciendis deleniti explicabo vel quia iure commodi delectus veniam aliquid, facere ipsum voluptatem molestiae and of quibusdam anc quaerat anc possimus cumque doloremque.</p>
+        </div>
+        </div>
+       </div>
+
+       <!-- clent review -->
+
+  <h2 style="text-align: center;font-size: 25px; color: #fff; margin-top: 35px;">Client Reviews</h2>
+    <div class="review-cards">
+        <!-- Review Card 1 -->
+        <div class="review-card">
+            <div class="review-name">John Doe</div>
+            <div class="rating">★★★★★</div>
+           <div class="review-description">
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus tristique.
+            </div>
+        </div>
+
+        <!-- Review Card 2 -->
+        <div class="review-card">
+            <div class="review-name">Jane Smith</div>
+            <div class="rating">★★★★☆</div>
+        <div class="review-description">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus tristique.
+            </div>
+        </div>
+
+        <!-- Review Card 3 -->
+        <div class="review-card">
+            <div class="review-name">Alice Johnson</div>
+            <div class="rating">★★★★★</div>
+           <div class="review-description">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus tristique.
+            </div>
+        </div>
+
+        <!-- Review Card 4 -->
+        <div class="review-card">
+            <div class="review-name">Alexandra</div>
+            <div class="rating">★★★☆☆</div>
+             <div class="review-description">
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus tristique.
+            </div>
+        </div>
+    </div>
+
+
+      <!-- footer -->
+      <footer>
+        <div class="content">
+          <div class="top">
+            <div class="logo-details">
+              <i class="fab fa-slack"></i>
+              <span class="logo_name">ShopLane</span>
+            </div>
+            <div class="media-icons">
+              <a href="https://www.facebook.com"><i class="fab fa-facebook-f"></i></a>
+              <a href="https://www.twitter.com"><i class="fab fa-twitter"></i></a>
+              <a href="https://www.instagram.com"><i class="fab fa-instagram"></i></a>
+              <a href="https://www.linkedin.com"><i class="fab fa-linkedin-in"></i></a>
+              <a href="https://www.youtube.com"><i class="fab fa-youtube"></i></a>
+            </div>
+          </div>
+          <div class="link-boxes">
+            <ul class="box">
+              <li class="link_name">Company</li>
+              <li><a href="#">Home</a></li>
+              <li><a href="#">Contact us</a></li>
+              <li><a href="#">Accessories</a></li>
+              <li><a href="#">Shop now</a></li>
+            </ul>
+            <ul class="box">
+              <li class="link_name">Services</li>
+              <li><a href="#">Free delivery</a></li>
+              <li><a href="#">Good quality</a></li>
+              <li><a href="#">80% discount</a></li>
+              <li><a href="#">delivery on time</a></li>
+            </ul>
+            <ul class="box">
+              <li class="link_name">Account</li>
+              <li><a href="#">Profile</a></li>
+              <li><a href="#">My account</a></li>
+              <li><a href="#">Prefrences</a></li>
+              <li><a href="#">Purchase</a></li>
+            </ul>
+            <ul class="box">
+              <li class="link_name">Categories</li>
+              <li><a href="#">Shoes</a></li>
+              <li><a href="#">Watch</a></li>
+              <li><a href="#">Jewellery</a></li>
+              <li><a href="#">Cap</a></li>
+            </ul>
+            <ul class="box input-box">
+              <li class="link_name">shop now</li>
+              <li><input type="text" placeholder="Enter your email"></li>
+              <li><input type="button" value="shop now"></li>
+            </ul>
+          </div>
+        </div>
+        <div class="bottom-details">
+          <div class="bottom_text">
+            <span class="copyright_text">Copyright &#169; 2023 <a>CodingGirl.</a>All rights reserved</span>
+         </div>
+        </div>
+      </footer>
+
+
+    <script>
+   document.addEventListener("DOMContentLoaded", function () {
+            // Retrieve the selected product ID from local storage
+            const selectedProductId = localStorage.getItem('selectedProduct');
+
+            // Function to fetch the product data from local storage and update the detail page
+            function fetchProductData(productId) {
+                // Retrieve product data from local storage
+                const products = JSON.parse(localStorage.getItem('allProducts'));
+
+                if (products) {
+                    // Find the product with the matching ID
+                    const selectedProduct = products.find(product => product.id === Number(productId));
+
+                    if (selectedProduct) {
+                        // Update the detail page with the product data
+                        document.getElementById('product-image').src = `image/${selectedProduct.image}`;
+                        document.getElementById('product-name').textContent = selectedProduct.name;
+                        document.getElementById('product-price').textContent = `Price: $${selectedProduct.price}`;
+                    }
+                }
+            }
+
+            if (selectedProductId) {
+                fetchProductData(selectedProductId);
+            }
+        });
+ </script>
+
+   
+<script>
+    // js for welcome msg
+  document.addEventListener("DOMContentLoaded", () => {
+    const welcomeUsername = document.getElementById("welcomeUsername");
+    const userLoggedIn = localStorage.getItem("userLoggedIn");
+   if (userLoggedIn === "true") {
+      const username = localStorage.getItem("username");
+      welcomeUsername.textContent = username; // Display the username
+    }
+  });
+  </script>
+
+
+ <script>
+   // js for header navbar
+   var navLinks = document.getElementById("navbar");
+   function showMenu(){
+   navLinks.style.right = "0";
+   }
+  function hideMenu(){
+  navLinks.style.right = "-200px";
+  }
+  </script>
+
+</body>
+</html>
+
+
+
+
+
+
