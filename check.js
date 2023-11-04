@@ -1,3 +1,4 @@
+document.addEventListener("DOMContentLoaded", function() {
 const cartProducts = document.getElementById('cart-products');
 const cartTotal = document.getElementById('cart-total');
 const checkoutBtn = document.getElementById('checkout-btn');
@@ -5,6 +6,8 @@ const modal = document.getElementById('myModal');
 const closeModalButton = document.querySelector('.close');
 const modalCloseBtn = document.querySelector('.modal-close-btn');
 const goToHomepageBtn = document.querySelector('.go-to-homepage-btn');
+const goToProductpageBtn = document.getElementById('go-to-productpage-btn');
+
 
 let cartItems = [];
 let total = 0;
@@ -17,6 +20,7 @@ function saveOrderToHistory(order) {
         orderHistory.push(order);
         localStorage.setItem(`orderHistory_${loggedInUser}`, JSON.stringify(orderHistory));
     }
+    console.log('Logged in user:', loggedInUser);
 }
 
 // Function to render cart products
@@ -100,10 +104,16 @@ function openModal() {
   }
   
   // Add event listener to the Checkout button
-  checkoutBtn.addEventListener('click', function() {
-    checkout();
-    openModal();
-  });
+checkoutBtn.addEventListener('click', function() {
+    if (cartItems.length === 0) {
+        // Cart is empty, show empty cart modal
+        openEmptyCartModal();
+    } else {
+        // Cart has products, show successful order modal
+        checkout();
+        openModal();
+    }
+});
   
   // Add event listener to close the modal using the "Close" button within modal content
   modalCloseBtn.addEventListener('click', closeModal);
@@ -127,7 +137,8 @@ function checkout() {
     const order = {
         date: new Date().toLocaleDateString(), // Capture the current date
         items: [...cartItems],
-    };
+       };
+       console.log('Created order:', order);
 
     // Save the order to order history for the currently logged-in user
     saveOrderToHistory(order);
@@ -138,6 +149,36 @@ function checkout() {
     // Update local storage to clear the cart
     updateLocalStorage();
 }
+
+// Function to open the modal for an empty cart
+function openEmptyCartModal() {
+    // Get the empty cart modal element
+    const emptyCartModal = document.getElementById('modal-2');
+    
+    // Display the empty cart modal
+    emptyCartModal.style.display = 'block';
+}
+
+// Add event listener to close the empty cart modal using the "productpage" button
+document.getElementById('go-to-productpage-btn').addEventListener('click', function() {
+    // Redirect to the Products.html page
+    window.location.href = 'cart88.html';
+  });
+
+// Add event listener to close the empty cart modal using the close button (X)
+document.getElementById('modal-close-button2').addEventListener('click', function() {
+    // Get the empty cart modal element
+    const emptyCartModal = document.getElementById('modal-2');
+    
+    // Close the empty cart modal
+    emptyCartModal.style.display = 'none';
+});
+
+
+
+
+
+
 
 // Function to update local storage
 function updateLocalStorage() {
@@ -165,12 +206,8 @@ function loadCartItemsFromLocalStorage() {
   }
   
 
-//   document.getElementById('login-button').addEventListener('click', function () {
-//     const userEmail = prompt('Enter your email to log in:');
-//     if (userEmail) {
-//         setLoggedInUser(userEmail);
-//     }
-// });
 
 
-initCartPage();
+
+initCartPage(); 
+});
