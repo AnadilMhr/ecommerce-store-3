@@ -934,8 +934,12 @@ header .cart-count{
             const addToCartButton = productItem.querySelector('.add-to-cart-btn');
             addToCartButton.addEventListener('click', () => addToCart(product));
           
-          
-productItem.addEventListener('click', () => openProductDetail(product));
+          // Modify the event listener for the product card to open the detail page
+productItem.addEventListener('click', (event) => {
+    if (!event.target.classList.contains('add-to-cart-btn')) {
+        openProductDetail(product);
+    }
+});
    // Function to handle product card click
    function openProductDetail(product) {
     // Store the selected product ID in local storage
