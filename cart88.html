@@ -685,6 +685,42 @@ header .cart-count{
     font-size: 19px;
   }
  }
+
+    
+ /* Add this style for the toast notification */
+.toast {
+  display: none;
+  position: fixed;
+  bottom: 10px; 
+  left: 50%; 
+  /* bottom: 480px;
+  left: 85%;  */
+  transform: translateX(-50%);
+  background-color: #4CAF50;
+  color: white;
+  padding: 15px;
+  border-radius: 5px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+}    
+/* Media query for smaller screens */
+@media screen and (max-width: 768px) {
+  .toast {
+    bottom: 10px; /* Adjust the position for smaller screens */
+    left: 50%; /* Center the toast on smaller screens */
+    transform: translateX(-50%);
+    padding: 10px; /* Adjust padding for smaller screens */
+  }
+}
+
+/* Media query for larger screens */
+@media screen and (min-width: 1200px) {
+  .toast {
+    bottom: 480px; /* Adjust the position for larger screens */
+    left: 85%; /* Adjust the left position for larger screens */
+    transform: translateX(-50%);
+  }
+}
+        
             </style>  
             <header>
               <div class="col"> 
@@ -729,6 +765,8 @@ header .cart-count{
                 </a>
           </div>
          </div>
+    
+         <div class="toast" id="toast">Product added to cart!</div>
         
           <div class="buttons-6">
             <a class="btn-a active" href="#" onclick="activateButton(this);">All Products</a>
@@ -979,18 +1017,44 @@ productItem.addEventListener('click', (event) => {
 
 
     //  Function to add a product to the cart
- function addToCart(product) {
-     const existingCartItem = cartItems.find(item => item.id === product.id);
+// function addToCart(product) {
+    // const existingCartItem = cartItems.find(item => item.id === product.id);
 
-    if (existingCartItem) {
-        existingCartItem.quantity += 1;
-         } else {
-        cartItems.push({ ...product, quantity: 1 });
-    }
+   // if (existingCartItem) {
+      //  existingCartItem.quantity += 1;
+      //   } else {
+     //   cartItems.push({ ...product, quantity: 1 });
+ //   }
 
-    updateCartCount();
-   updateLocalStorage();
- }
+ //   updateCartCount();
+//   updateLocalStorage();
+// }
+      
+ //  Function to add a product to the cart
+      function addToCart(product) {
+  const existingCartItem = cartItems.find(item => item.id === product.id);
+
+  if (existingCartItem) {
+    existingCartItem.quantity += 1;
+  } else {
+    cartItems.push({ ...product, quantity: 1 });
+  }
+
+  updateCartCount();
+  updateLocalStorage();
+  showNotification(); // Call the function to show the toast notification
+}
+
+// Function to show the toast notification
+function showNotification() {
+  const toast = document.getElementById('toast');
+  toast.style.display = 'block';
+
+  // Hide the toast after 3 seconds (adjust the timeout as needed)
+  setTimeout(() => {
+    toast.style.display = 'none';
+  }, 2000);
+}
 
     // Function to update local storage
     function updateLocalStorage() {
