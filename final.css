@@ -340,7 +340,9 @@ header .cart-count{
   flex-wrap: wrap;
   box-shadow: 0 5px 10px #0005;
   overflow: hidden;
-  animation: slideIn2 3s ease-in-out infinite;  
+ /* animation: slideIn2 3s ease-in-out infinite; */
+  animation: slideIn2 3s ease-in-out forwards;
+	
 }
 
 .banner-container .banner .shoe{
