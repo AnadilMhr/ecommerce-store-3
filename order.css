@@ -304,10 +304,32 @@ tr{
 @media (max-width: 768px) {
   .order-history {
       padding: 10px;
+       max-width: 600px;
   }
 
   .order-history h2 {
       font-size: 28px;
+  }
+}
+
+/* Responsive design for smaller screens */
+@media (max-width: 535px) {
+  .order-history {
+    max-width: 100%;
+    padding: 10px;
+  }
+
+  .order-history h2 {
+    font-size: 20px;
+    margin-bottom: 15px;
+  }
+
+  th, td {
+    padding: 10px;
+    display: block;
+    width: 100%;
+    box-sizing: border-box; 
+    text-align: center; 
   }
 }
 /* Additional styles as needed */
