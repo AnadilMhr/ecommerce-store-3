@@ -1,181 +1,171 @@
-@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap");
-
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: "Poppins", sans-serif;
-    overflow-x: hidden;
-    text-decoration: none;
-    /* overflow-y: hidden; */
-  }
-
-  body{
-    background-color: black;
-  }
-
-  /* header */
-  header{
-    display: flex;
-    padding: 0.8rem 5%;
-    justify-content: space-between;
-    align-items: center;  
-    background-color: #13131a;  
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+  overflow-x: hidden;
+  text-decoration: none;
 }
 
-header .logo{
-    font-weight: bold;
-    font-size: 1.5rem;
-    color: red;
+body {
+  background-color: black;
+  overflow-x: hidden;
 }
 
-header .navbar a{
-    font-size: 1rem;
-    padding: 0 1.5rem;
-    color: #fff;
-    cursor: pointer;
-    transition: .5s;
+header {
+  display: flex;
+  padding: 0.8rem 5%;
+  justify-content: space-between;
+  align-items: center;  
+  background-color: #13131a;  
 }
 
-header .navbar a:hover{
-    color: red;
+header .logo {
+  font-weight: bold;
+  font-size: 1.5rem;
+  color: red;
 }
 
-header .icons a{
-    font-size: 1.5rem;
-    margin-left:2rem;
-    color: #fff;
+header .navbar a {
+  font-size: 1rem;
+  padding: 0 1.5rem;
+  color: #fff;
+  cursor: pointer;
+  transition: .5s;
 }
 
-header #bar{
-    color: #fff;
-    font-size: 1.5rem;
-    display: none; 
+header .navbar a:hover {
+  color: red;
 }
 
-header #bar-1{
-    color:black;
-    font-size: 1.5rem;
-    display: none;
+header .icons a {
+  font-size: 1.5rem;
+  margin-left: 2rem;
+  color: #fff;
 }
-header .icons{
+
+header #bar {
+  color: #fff;
+  font-size: 1.5rem;
+  display: none; 
+}
+
+header #bar-1 {
+  color: #fff;
+  font-size: 1.5rem;
+  display: none;
+}
+
+header .icons {
   display: flex;
 }
 
-#welcome{
+#welcome {
   font-weight: 500;
   color: #fff;
- font-size: 30px;
- }
+  font-size: 27px;
+}
 
- .col{
+.col {
   display: flex;
   flex-direction: column;
-  
- }
+}
 
-header .cart-count{
+header .cart-count {
   position: absolute;
   top: 19px;
-  /* right: 102px; */
-   padding: 1px 0px 0px 5px;
+  padding: 1px 0px 0px 5px;
   font-size: 15px;
   background-color: red;
   height: 24px;
   width: 24px;
   overflow-y: hidden;
   border-radius: 50%;
-  /* display: flex;
-  justify-content: center;
-  align-items: center; */
 }
 
+/* Media query for smaller screens */
 
+
+@media screen and (max-width: 999px) {
+  header {
+      padding: 0.8rem 3%;
+  }
+
+  header .navbar {
+      flex-direction: column;
+      align-items: flex-start;
+      position: absolute;
+      top: 70px;
+      left: 0;
+      background-color: #13131a;
+      width: 100%;
+      z-index: 9999;
+      display: none;
+  }
+
+  header .navbar a {
+      padding: 1rem;
+      width: 100%;
+      text-align: center;
+  }
+
+  header .icons {
+      margin-left: auto;
+  }
+
+  header #bar {
+      display: block;
+      margin-left: 12px;
+  }
+
+  header #bar-1 {
+      display: block;
+      margin-left: 20px;
+margin-top: 10px;
+  }
+}
+
+@media screen and (min-width: 999px) {
+header .navbar {
+display: flex !important;
+}
+}
 
 @media (max-width:425px){
-  #welcome{
-    font-size: 20px;
-  }
- }
+#welcome{
+font-size: 20px;
+}
+}
 
-@media(max-width: 940px){
-  
-    header #bar{
-      display: block;
-      cursor: pointer;
-    }
-    header #bar-1{
-        display: block;
-        cursor: pointer;
-        margin-left: 10px;
-        margin-top: 10px;
-    }
-     header .navbar{
-       position: absolute;
-       background:#fff;
-       height: 100vh;
-       width: 200px;
-       top: 0;
-       right: -200px;
-       text-align: left;
-       /* z-index: 2; */
-       z-index: 9999;
-       transition: 1s;
-     }
-      header .navbar a{
-      color: black;
-      margin: 10px;
-      display: flex;
-      font-size: 17px;
- }
-    
-  }
 
-  @media(max-width:440px){
-    header .cart-count{
-      font-size:11px;
-      width:18px;
-      height: 18px;
-      
-    }
 
-    header .icons a{
-      font-size:1rem;
-    }
-
-    header #bar{
-      font-size: 1rem;
-    }
-  }
+@media(max-width:430px){
+header .cart-count{
+font-size: 11px;
+height: 19px;
+width: 19px;
+top: 20px;
+}
+header .icons a{
+font-size: 1rem;
+margin-left: 2rem;
+}
+header #bar{
+font-size:1rem
+}
+}
 
 @media(max-width:370px){
-  header .logo{
-    font-size:1.5rem
-  }
- 
+header .logo{
+font-size:1.5rem
+}
 }
 
-@media(max-width:330px){
-  header .icons a{
-    margin-left: 1.5rem;
-  }
-}
 
-@media(max-width:310px){
-  header .cart-count{
-    font-size: 9px;
-    width: 15px;
-    height: 15px;
-    top: 28px;
+@media(max-width:300px){
+  #welcome{
+    font-size: 15px;
   }
-
-  header .icons a{
-    font-size: .7rem;
-    margin-left:1.2rem;
- }
- header #bar{
-  font-size:.7rem ;
- }
 }
 
       /* contact section start */
