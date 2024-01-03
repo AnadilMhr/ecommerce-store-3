@@ -138,15 +138,15 @@
     <script>
       // js for header navbar
 
- var navLinks = document.getElementById("navbar");
+ function toggleMenu() {
+            var navbar = document.getElementById("navbar");
 
- function showMenu(){
- navLinks.style.right = "0";
- }
-
- function hideMenu(){
-navLinks.style.right = "-200px";
-}
+            if (navbar.style.display === "none" || navbar.style.display === "") {
+                navbar.style.display = "flex";
+            } else {
+                navbar.style.display = "none";
+            }
+        }
   </script>
 
   
