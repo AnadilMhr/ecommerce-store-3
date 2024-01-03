@@ -13,35 +13,32 @@
 <body>
   <!-- Header Start -->
     
-  <header>
-    <div class="col"> 
-     <a href="#" class="logo">ShopLane</a>
-     <h4><a id="welcome">Welcome: <span id="welcomeUsername"></span></a></h4>
-    </div>
+ <header>
+  <div class="col"> 
+      <a href="#" class="logo">ShopLane</a>
+      <h4><a id="welcome">Welcome: <span id="welcomeUsername"></span></a></h4>
+  </div>
 
-     <nav class="navbar" id="navbar">
-        <i id="bar-1" class="fa fa-times" onclick="hideMenu()"></i>
-        <a href="./website.html">Home</a>
-        <a href="./cart88.html">Products</a>
-        <a href="./contact.html">Contact Us</a>
-        <a href="./order.html">Order Histroy</a>
-        <!-- <a href="./cart2.html">Cart</a>
-        <a href="#" id="logout-link">Logout</a> -->
-     </nav>
+  <nav class="navbar" id="navbar">
+      <i id="bar-1" class="fa fa-times" onclick="toggleMenu()"></i>
+      <a href="./website.html">Home</a>
+      <a href="./cart88.html">Products</a>
+      <a href="./contact.html">Contact Us</a>
+      <a href="./order.html">Order Histroy</a>
+  </nav>
 
-      <div class="icons">
-        <div class="cart-icon">
-          <a href="./cart2.html"> <!-- Open cart page in a new tab -->
-           <i   class="fa-solid fa-cart-shopping" ></i> 
+  <div class="icons">
+      <div class="cart-icon">
+          <a href="./cart2.html">
+              <i class="fa-solid fa-cart-shopping"></i> 
               <span class="cart-count">0</span>
-            </a>
+          </a>
       </div>
-        <!-- <a href="" class="fas fa-shopping-cart"></a> -->
-        <a href="#" id="logout-link"  class="fas fa-sign-out"></a>
-      </div>
+      <a href="#" id="logout-link" class="fas fa-sign-out"></a>
+  </div>
 
-     <i class="fa fa-bars" id="bar" onclick="showMenu()"></i>
-    </header>
+  <i class="fa fa-bars" id="bar" onclick="toggleMenu()"></i>
+</header>
 
  <!-- Header End -->
    
